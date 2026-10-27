@@ -9,16 +9,85 @@
     <!-- Google Font: Inter / Cairo -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
+        :root {
+            color-scheme: light;
+            --page-gradient: linear-gradient(135deg, #dbeafe 0%, #ede9fe 48%, #ccfbf1 100%);
+            --glass-background: rgba(255, 255, 255, 0.68);
+            --glass-border: rgba(255, 255, 255, 0.72);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                color-scheme: dark;
+                --page-gradient: linear-gradient(135deg, #0f172a 0%, #172554 48%, #312e81 100%);
+                --glass-background: rgba(15, 23, 42, 0.68);
+                --glass-border: rgba(255, 255, 255, 0.12);
+            }
+        }
+
         body {
             font-family: 'Cairo', sans-serif;
+            background: var(--page-gradient);
+            position: relative;
+            isolation: isolate;
+            overflow-x: hidden;
         }
+
         .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: var(--glass-background);
+            border-color: var(--glass-border);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+
+        .background-glows {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .glow-circle {
+            position: absolute;
+            width: 22rem;
+            height: 22rem;
+            border-radius: 9999px;
+            filter: blur(90px);
+            opacity: 0.45;
+        }
+
+        .glow-blue {
+            top: -7rem;
+            left: -6rem;
+            background: #60a5fa;
+        }
+
+        .glow-violet {
+            top: 35%;
+            right: -9rem;
+            background: #a78bfa;
+        }
+
+        .glow-teal {
+            bottom: -10rem;
+            left: 25%;
+            background: #5eead4;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .glow-circle {
+                opacity: 0.22;
+            }
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 min-h-screen text-slate-800 flex flex-col justify-between">
+<body class="min-h-screen text-slate-800 dark:text-slate-100 flex flex-col justify-between">
+    <div class="background-glows" aria-hidden="true">
+        <div class="glow-circle glow-blue"></div>
+        <div class="glow-circle glow-violet"></div>
+        <div class="glow-circle glow-teal"></div>
+    </div>
 
     <!-- Toast Notification -->
     <div id="toast" class="fixed top-5 left-1/2 transform -translate-x-1/2 -translate-y-20 bg-emerald-600 text-white px-6 py-3 rounded-xl shadow-2xl transition-all duration-300 z-50 flex items-center space-x-3 space-x-reverse font-semibold opacity-0 pointer-events-none">
@@ -29,14 +98,14 @@
     </div>
 
     <!-- Header / Hero Section -->
-    <header class="w-full py-8 px-4 text-center text-white relative overflow-hidden">
+    <header class="w-full py-8 px-4 text-center text-slate-900 dark:text-white relative overflow-hidden">
         <div class="max-w-4xl mx-auto space-y-4">
-            <div class="inline-flex items-center space-x-2 space-x-reverse bg-blue-700/60 border border-blue-400/30 px-4 py-1.5 rounded-full text-sm font-semibold text-blue-200">
+            <div class="inline-flex items-center space-x-2 space-x-reverse bg-white/50 dark:bg-blue-950/50 border border-white/60 dark:border-blue-400/30 px-4 py-1.5 rounded-full text-sm font-semibold text-blue-800 dark:text-blue-200 backdrop-blur-md">
                 <svg class="w-4 h-4 text-blue-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788.92l-4 1.714a1 1 0 00-.356.257l-3.142 1.346a1 1 0 000 1.84l7 3a1 1 0 00.788 0l7-3a1 1 0 000-1.84l-3.142-1.346a1 1 0 00-.356-.257l-4-1.714a1 1 0 11-.788-.92l4-1.714a1 1 0 00.356-.257l3.142-1.346a1 1 0 000-1.84l-7-3z"/></svg>
                 <span>Built different by Peter</span>
             </div>
             <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight">مدرسة السيدة خديجة التجريبية لغات</h1>
-            <p class="text-lg md:text-xl text-blue-200 font-medium">استعلام حسابات الدخول لمنصة البرمجة والذكاء الاصطناعي للصف  الثاني ثانوي </p>
+            <p class="text-lg md:text-xl text-blue-800 dark:text-blue-200 font-medium">استعلام حسابات الدخول لمنصة البرمجة والذكاء الاصطناعي للصف  الثاني ثانوي </p>
             
             <div class="pt-2">
                 <a href="https://me-portal.qureo.education" target="_blank" class="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-6 py-3 rounded-xl shadow-lg transition transform hover:-translate-y-0.5">
@@ -50,18 +119,18 @@
     <!-- Main Search & Results Container -->
     <main class="flex-grow max-w-5xl w-full mx-auto px-4 pb-16">
         <!-- Search Card -->
-        <div class="glass-card rounded-2xl shadow-2xl p-6 md:p-8 mb-8 border border-white/20">
-            <label for="search-input" class="block text-lg font-bold text-slate-800 mb-2">ابحث باسم الطالب أو كود الطالب (اسم المستخدم):</label>
+        <div class="glass-card rounded-2xl shadow-2xl p-6 md:p-8 mb-8 border">
+            <label for="search-input" class="block text-lg font-bold text-slate-800 dark:text-slate-100 mb-2">ابحث باسم الطالب أو كود الطالب (اسم المستخدم):</label>
             <div class="relative">
                 <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-slate-400">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                     </svg>
                 </div>
-                <input type="text" id="search-input" placeholder="اكتب اسم الطالب أو الكود هنا (مثال:بيتر، 464232212)..." class="w-full pr-12 pl-4 py-4 bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white text-lg transition shadow-inner">
+                <input type="text" id="search-input" placeholder="اكتب اسم الطالب أو الكود هنا (مثال:بيتر، 464232212)..." class="w-full pr-12 pl-4 py-4 bg-white/70 dark:bg-slate-950/50 border border-slate-300/80 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white dark:focus:bg-slate-900 text-lg transition shadow-inner text-slate-900 dark:text-slate-100 placeholder:text-slate-400">
             </div>
-            <div class="flex flex-wrap justify-between items-center mt-4 text-sm text-slate-600 font-medium">
-                <span id="results-count">جاري تحميل قاعدة البيانات...</span>
+            <div class="flex flex-wrap justify-between items-center mt-4 text-sm text-slate-600 dark:text-slate-300 font-medium">
+                <span id="results-count">ابدأ بكتابة اسم الطالب أو الكود للبحث.</span>
                 <button id="clear-btn" class="text-blue-600 hover:text-blue-800 underline font-semibold hidden">إعادة ضبط البحث</button>
             </div>
         </div>
@@ -72,18 +141,18 @@
         </div>
 
         <!-- Empty State -->
-        <div id="empty-state" class="hidden text-center py-16 bg-white/10 rounded-2xl border border-white/10 text-white">
+        <div id="empty-state" class="hidden text-center py-16 bg-white/40 dark:bg-white/10 rounded-2xl border border-white/50 dark:border-white/10 text-slate-800 dark:text-white backdrop-blur-md">
             <svg class="w-16 h-16 mx-auto text-blue-300 mb-4 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
             <h3 class="text-xl font-bold">عذراً، لم يتم العثور على طالب بهذا الاسم أو الكود</h3>
-            <p class="text-blue-200 mt-2">تأكد من صحة الحروف أو الكود المدخل وحاول مرة أخرى.</p>
+            <p class="text-blue-800 dark:text-blue-200 mt-2">تأكد من صحة الحروف أو الكود المدخل وحاول مرة أخرى.</p>
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-blue-950/80 text-blue-200 text-center py-6 px-4 border-t border-blue-900 mt-auto">
-        <p class="text-sm">جميع الحقوق محفوظة © للمهندس بيتر</p>
+    <footer class="bg-white/35 dark:bg-blue-950/65 text-blue-900 dark:text-blue-200 text-center py-6 px-4 border-t border-white/50 dark:border-blue-900 mt-auto backdrop-blur-md">
+        <p class="text-sm">Crafted with ❤️ by Eng. Peter | All Rights Reserved ©</p>
     </footer>
 
     <!-- JavaScript Data & Logic -->
@@ -399,19 +468,19 @@
             }, 3000);
         }
 
-        function copyToClipboard(text, studentName) {
+        function copyToClipboard(text, successMessage) {
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(text).then(() => {
-                    showToast(`تم نسخ كلمة المرور للطالب/ة: ${studentName}`);
+                    showToast(successMessage);
                 }).catch(() => {
-                    fallbackCopy(text, studentName);
+                    fallbackCopy(text, successMessage);
                 });
             } else {
-                fallbackCopy(text, studentName);
+                fallbackCopy(text, successMessage);
             }
         }
 
-        function fallbackCopy(text, studentName) {
+        function fallbackCopy(text, successMessage) {
             const textarea = document.createElement("textarea");
             textarea.value = text;
             textarea.style.position = "fixed";
@@ -419,12 +488,16 @@
             textarea.focus();
             textarea.select();
             try {
-                document.execCommand('copy');
-                showToast(`تم نسخ كلمة المرور للطالب/ة: ${studentName}`);
+                if (document.execCommand('copy')) {
+                    showToast(successMessage);
+                } else {
+                    showToast("تعذر النسخ تلقائياً، يرجى النسخ يدوياً");
+                }
             } catch (err) {
-                showToast("تعذر النسخ تلقائياً، ينسخ يدويًا");
+                showToast("تعذر النسخ تلقائياً، يرجى النسخ يدوياً");
+            } finally {
+                document.body.removeChild(textarea);
             }
-            document.body.removeChild(textarea);
         }
 
         function renderStudents(filteredList) {
@@ -448,25 +521,32 @@
 
             filteredList.forEach(student => {
                 const card = document.createElement('div');
-                card.className = 'bg-white rounded-2xl p-6 shadow-xl border border-slate-100 hover:shadow-2xl transition duration-300 flex flex-col justify-between space-y-4';
+                card.className = 'bg-white/75 dark:bg-slate-900/65 backdrop-blur-xl rounded-2xl p-6 shadow-xl border border-white/70 dark:border-white/10 hover:shadow-2xl transition duration-300 flex flex-col justify-between space-y-4';
                 
                 card.innerHTML = `
                     <div>
                         <div class="flex justify-between items-start mb-2">
-                            <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full">كود الطالب: ${student.id}</span>
-                            <span class="text-xs text-slate-400 font-semibold">الصف الثاني الثانوي</span>
+                            <div class="flex items-center gap-2">
+                                <span class="bg-blue-100 dark:bg-blue-950/80 text-blue-800 dark:text-blue-200 text-xs font-bold px-3 py-1 rounded-full">كود الطالب: ${student.id}</span>
+                                <button onclick="copyToClipboard('${student.id}', 'تم نسخ كود الطالب')" aria-label="نسخ كود الطالب" title="نسخ كود الطالب" class="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg shadow transition flex items-center justify-center">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <span class="text-xs text-slate-500 dark:text-slate-400 font-semibold">الصف الثاني الثانوي</span>
                         </div>
-                        <h3 class="text-xl font-bold text-slate-800 mt-2">${student.name}</h3>
+                        <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mt-2">${student.name}</h3>
                     </div>
                     
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex items-center justify-between">
+                    <div class="bg-slate-50/80 dark:bg-slate-950/40 p-4 rounded-xl border border-slate-200 dark:border-slate-700 flex items-center justify-between">
                         <div>
-                            <span class="block text-xs text-slate-500 font-semibold mb-1">كلمة المرور الخاصة بمنصة البرمجة:</span>
-                            <span class="font-mono text-lg font-bold text-indigo-700 tracking-wider">${student.pass}</span>
+                            <span class="block text-xs text-slate-500 dark:text-slate-400 font-semibold mb-1">كلمة المرور الخاصة بمنصة البرمجة:</span>
+                            <span class="font-mono text-lg font-bold text-indigo-700 dark:text-indigo-300 tracking-wider">${student.pass}</span>
                         </div>
-                        <button onclick="copyToClipboard('${student.pass}', '${student.name}')" class="bg-blue-600 hover:bg-blue-700 text-white p-2.5 rounded-xl shadow transition flex items-center justify-center title="نسخ كلمة المرور">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                        <button onclick="copyToClipboard('${student.pass}', 'تم نسخ كلمة المرور')" aria-label="نسخ كلمة المرور" title="نسخ كلمة المرور" class="bg-blue-600 hover:bg-blue-700 text-white p-2.5 rounded-xl shadow transition flex items-center justify-center">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
                             </svg>
                         </button>
                     </div>
@@ -475,11 +555,17 @@
             });
         }
 
-        // Initial render: show first 12 students or all when searched
         function handleSearch() {
             const query = searchInput.value.trim().toLowerCase();
             if (query === '') {
-                // Show a helpful subset or all if preferred. Let's show all or top 20 by default, or all 289 since it's snappy.
+                resultsGrid.innerHTML = '';
+                emptyState.classList.add('hidden');
+                resultsCount.textContent = 'ابدأ بكتابة اسم الطالب أو الكود للبحث.';
+                clearBtn.classList.add('hidden');
+                return;
+            }
+
+            if (query === 'ip') {
                 renderStudents(studentsData);
                 return;
             }
@@ -498,10 +584,6 @@
             searchInput.focus();
         });
 
-        // Load all initially
-        window.addEventListener('DOMContentLoaded', () => {
-            renderStudents(studentsData);
-        });
     </script>
 </body>
 </html>
