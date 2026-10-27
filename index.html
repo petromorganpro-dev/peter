@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استعلام حسابات منصة البرمجة والذكاء الاصطناعي - مدرسة السيدة خديجة</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font: Inter / Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 min-h-screen text-slate-800 flex flex-col justify-between">
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed top-5 left-1/2 transform -translate-x-1/2 -translate-y-20 bg-emerald-600 text-white px-6 py-3 rounded-xl shadow-2xl transition-all duration-300 z-50 flex items-center space-x-3 space-x-reverse font-semibold opacity-0 pointer-events-none">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+        <span id="toast-message">تم نسخ البيانات بنجاح!</span>
+    </div>
+
+    <!-- Header / Hero Section -->
+    <header class="w-full py-8 px-4 text-center text-white relative overflow-hidden">
+        <div class="max-w-4xl mx-auto space-y-4">
+            <div class="inline-flex items-center space-x-2 space-x-reverse bg-blue-700/60 border border-blue-400/30 px-4 py-1.5 rounded-full text-sm font-semibold text-blue-200">
+                <svg class="w-4 h-4 text-blue-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788.92l-4 1.714a1 1 0 00-.356.257l-3.142 1.346a1 1 0 000 1.84l7 3a1 1 0 00.788 0l7-3a1 1 0 000-1.84l-3.142-1.346a1 1 0 00-.356-.257l-4-1.714a1 1 0 11-.788-.92l4-1.714a1 1 0 00.356-.257l3.142-1.346a1 1 0 000-1.84l-7-3z"/></svg>
+                <span>made by peter</span>
+            </div>
+            <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight">مدرسة السيدة خديجة التجريبية لغات</h1>
+            <p class="text-lg md:text-xl text-blue-200 font-medium">استعلام حسابات الدخول لمنصة البرمجة والذكاء الاصطناعي للصف  الثاني ثانوي </p>
+            
+            <div class="pt-2">
+                <a href="https://me-portal.qureo.education" target="_blank" class="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-6 py-3 rounded-xl shadow-lg transition transform hover:-translate-y-0.5">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                    <span>الذهاب إلى منصة الامتحانات والبرمجة الرسمية</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Search & Results Container -->
+    <main class="flex-grow max-w-5xl w-full mx-auto px-4 pb-16">
+        <!-- Search Card -->
+        <div class="glass-card rounded-2xl shadow-2xl p-6 md:p-8 mb-8 border border-white/20">
+            <label for="search-input" class="block text-lg font-bold text-slate-800 mb-2">ابحث باسم الطالب أو كود الطالب (اسم المستخدم):</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-slate-400">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+                <input type="text" id="search-input" placeholder="اكتب اسم الطالب أو الكود هنا (مثال:بيتر، 464232212)..." class="w-full pr-12 pl-4 py-4 bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white text-lg transition shadow-inner">
+            </div>
+            <div class="flex flex-wrap justify-between items-center mt-4 text-sm text-slate-600 font-medium">
+                <span id="results-count">جاري تحميل قاعدة البيانات...</span>
+                <button id="clear-btn" class="text-blue-600 hover:text-blue-800 underline font-semibold hidden">إعادة ضبط البحث</button>
+            </div>
+        </div>
+
+        <!-- Results Grid -->
+        <div id="results-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Dynamic Cards Will Be Injected Here -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="hidden text-center py-16 bg-white/10 rounded-2xl border border-white/10 text-white">
+            <svg class="w-16 h-16 mx-auto text-blue-300 mb-4 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <h3 class="text-xl font-bold">عذراً، لم يتم العثور على طالب بهذا الاسم أو الكود</h3>
+            <p class="text-blue-200 mt-2">تأكد من صحة الحروف أو الكود المدخل وحاول مرة أخرى.</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-950/80 text-blue-200 text-center py-6 px-4 border-t border-blue-900 mt-auto">
+        <p class="text-sm">جميع الحقوق محفوظة © مدرسة السيدة خديجة التجريبية الثانوية لغات - الإدارة المركزية لتكنولوجيا التعليم</p>
+    </footer>
+
+    <!-- JavaScript Data & Logic -->
+    <script>
+        // Complete database of 289 students extracted from official school records
+        const studentsData = [
+            { id: "464232212", name: "لوجين على ابراهيم محمد عبد المجيد", pass: "82Tbvg_!" },
+            { id: "463902772", name: "سهيله عمرو ابراهيم مصطفى سلطان", pass: "5K_Ep5uU" },
+            { id: "464232418", name: "لميس محمود احمد عبد الواحد محمد", pass: "Ga2kC3_B" },
+            { id: "463703477", name: "سما تامر محمود محمد محمود", pass: "nP63?MxB" },
+            { id: "474134573", name: "معاذ محمود فؤاد عبد الهادي ابو العلا", pass: "d99EPw8?" },
+            { id: "464231592", name: "يوسف مينا سعد توفيق سعد", pass: "4U_46g2g" },
+            { id: "467400327", name: "عبد العاطى ياسر عبد العاطى احمد سعد", pass: "VTf e 8G" },
+            { id: "465692234", name: "منة الله سيد محمد احمد بركات", pass: "Q9H2t2_u" },
+            { id: "463797859", name: "بسمله يحيى زكريا محمد", pass: "v93CGxP" },
+            { id: "464708825", name: "حازم مجدى عباس السيد صالح", pass: "kRw6F2V" },
+            { id: "466968874", name: "مارك ملاك رمسيس شفيق توفيلس", pass: "_zb28UzS" },
+            { id: "463702878", name: "مازن سامی احمد امین احمد", pass: "xD6?8xT3" },
+            { id: "464708121", name: "ندی محمد احمد سالم احمد", pass: "XWs?8J3n" },
+            { id: "465192410", name: "ريتاج وائل رمضان عيد الجزار", pass: "yneRyE!7" },
+            { id: "464231972", name: "ولاء عمرو محمد عبده محمد حبيب", pass: "ay!Bg2!t" },
+            { id: "463902112", name: "روان احمد مصطفی کمال فرج عبدالله ناص", pass: "6TVcP!!S" },
+            { id: "465161692", name: "عبد العزيز يحيى صابور مرسال سعيد", pass: "7P?pfby8" },
+            { id: "466975856", name: "زینه محمد مصطفي احمد عثمان", pass: "bwwRta_7" },
+            { id: "464564024", name: "فيلوباتير راجي ميشيل عبد الملك عبد المسيح", pass: "?9HRephk" },
+            { id: "469993972", name: "مريم احمد عبد اللطيف عبد الباري ابراهيم", pass: "xky!FY4u" },
+            { id: "463821471", name: "يوسف على عبدالله مراد على", pass: "Jg?p5qTT" },
+            { id: "464242738", name: "شهد اسلام عبد الحميد امين عبد الحميد", pass: "D5J4?naV" },
+            { id: "463703303", name: "جومانا سيمون مجدى عطاالله تادرس", pass: "HTKfwa9_" },
+            { id: "473957330", name: "رهف وليد عبد الوهاب عبد العزيز عبد الوهاب", pass: "C?q4RBAZ" },
+            { id: "463821623", name: "يوسف يحى محمد عبد الرحمن على", pass: "m4KjG_bC" },
+            { id: "469990374", name: "ايسل رضا على السيد", pass: "QbS3!Pa_" },
+            { id: "464230561", name: "عز الدين سامح مصطفی عفیفی احمد", pass: "G?Vec6Fw" },
+            { id: "465952232", name: "داليا مؤمن محمد محمد الشرقاوى", pass: "2U_CYy!A" },
+            { id: "470419222", name: "جنى محمد محمد السعيد احمد احمد الحنفي", pass: "CGP8Q!MS" },
+            { id: "466870215", name: "هنا رامى فيصل عبد الحميد ابراهيم", pass: "n94BJu?5" },
+            { id: "464259094", name: "كيرلس فريد فاروق عطيه عيد", pass: "rKGz?4eW" },
+            { id: "464270652", name: "رؤى هلال احمد هلال احمد", pass: "3_wPSfe8" },
+            { id: "465692214", name: "فادي جرجس طلعت ملاك بطرس", pass: "x6s?FHra" },
+            { id: "466971493", name: "سلمى حسن صبحی حسن خميس", pass: "4a?Umg8a" },
+            { id: "465161569", name: "مريم محمد صلاح العزب عزام", pass: "7afF?vME" },
+            { id: "463701093", name: "جنى محمد عشری محمد عبد التواب", pass: "V_6nk8YT" },
+            { id: "463797765", name: "بسمه هشام حنفی محمود حسن", pass: "Eg!J4nns" },
+            { id: "464231709", name: "رومانی هانی سمير لبيب عطيه", pass: "ZMJKY_2t" },
+            { id: "463821544", name: "على عاصم عبدالهادي الطنطاوى عبد المادي", pass: "_zfTJrp9" },
+            { id: "463179030", name: "ليالي على حسین محمد حسن", pass: "!4HT2Fpx" },
+            { id: "463821580", name: "حنين ياسر عبد العاطى سليمان عطا الله", pass: "w6DAsT?C" },
+            { id: "463797982", name: "ملك عاطف اسماعيل احمد", pass: "pTJ6r4?T" },
+            { id: "464262767", name: "يوسف محمد طلعت محمد على", pass: "7S_S7pVm" },
+            { id: "486776648", name: "عصماء احمد شعبان محمد احمد", pass: "pvufC4M!" },
+            { id: "463669892", name: "مينام سامی کمال طوني جنس", pass: "JZx8b_AW" },
+            { id: "470246178", name: "بسمله محمد احمد محمد حسن", pass: "Q7?Aj7D2" },
+            { id: "463700384", name: "علی احمد عيسى ابراهيم", pass: "_v9hJm6C" },
+            { id: "473990822", name: "مروان شعبان شاکر ابراهيم عبد المجيد", pass: "SatQ?g4!" },
+            { id: "463106233", name: "ريناد عبدالله على محمد بدران", pass: "PRXSf_5T" },
+            { id: "464228390", name: "مهند طارق سيد عبد الحميد زيدان", pass: "Xs?TV6pq" },
+            { id: "473990751", name: "زياد طه يحي محمد جبلی", pass: "v3V4K3!?" },
+            { id: "463668697", name: "جنا محمد عبد القادر حسین ايوب", pass: "Z?3ANttg" },
+            { id: "463821369", name: "فارس تامر سعيد محمد رمضان", pass: "D2mV?2Eb" },
+            { id: "479854578", name: "نهير جميل محمود محمود احمد", pass: "7auWz?Fm" },
+            { id: "464228601", name: "لوجين احمد موفق انور المصرى", pass: "yuY_zGt8" },
+            { id: "464265381", name: "مريم محمد عبد العليم عبد الحكم ابو النص", pass: "Pr?K5tQm" },
+            { id: "465192452", name: "على محمد حمدى مصطفى ابراهيم", pass: "aJ_cfJv9" },
+            { id: "464271926", name: "مريم صفى الدين السيد محمود نصار", pass: "?J6PM9ts" },
+            { id: "464261103", name: "ادهم محمود احمد محمود علی", pass: "s?8ghB7s" },
+            { id: "464260757", name: "عمر وليد طه محمود محمد", pass: "C3znZ7?q" },
+            { id: "467400033", name: "عبد الرحمن طه عبده محمد حامد", pass: "v!8SkW8S" },
+            { id: "463798047", name: "مريم طارق محمود عبد السلام احمد", pass: "_E8ku48D" },
+            { id: "464270742", name: "ملك امام محمد امام محمد", pass: "P8X?ESrU" },
+            { id: "463821104", name: "مريم حسام الدین موسى محمد حلمي", pass: "H4gs_8My" },
+            { id: "464241646", name: "مريهان تامر محمد عبد الغنى قنديل", pass: "VR_VkHz6" },
+            { id: "464699900", name: "تسنيم محمد عبد الحليم مدبولی دسوقی", pass: "_3?eeS2Q" },
+            { id: "465692184", name: "فارس عبد السلام عبد العزيز عمری سليمان", pass: "b??Gx6Yb" },
+            { id: "463700506", name: "عبد الخالق على عبد الخالق على حسن", pass: "z7ZW!am_" },
+            { id: "464270072", name: "مارفی سامح بخيت بسطروس داود", pass: "6zjFSdN_" },
+            { id: "498385682", name: "ساره اشرف امام محمد حسن", pass: "S6JN?dfA" },
+            { id: "463702992", name: "مريم محمد السيد ابراهيم عماره", pass: "_33EP_Xt" },
+            { id: "464945280", name: "تقوى علاء محمد رشاد محمد السبكي", pass: "5z2n!D8P" },
+            { id: "471904856", name: "معاذ احمد محمد عبد اللطيف ابراهيم", pass: "!g5XDXcZ" },
+            { id: "463703525", name: "سما هانى محمود الشحات الصفتي", pass: "9!cN6?X4" },
+            { id: "465951034", name: "احمد ايهاب محمد عبد الراضي السمان", pass: "zN_6MJ!k" },
+            { id: "469078131", name: "مصطفى محمد عبد الفتاح عبد العظيم حامد", pass: "7!RFaNBt" },
+            { id: "463669811", name: "عادل احمد عادل عبدالله ابوالعينين", pass: "4mXZAj_5" },
+            { id: "468356050", name: "جودی باسم حسين يوسف احمد", pass: "B4X3Qm!a" },
+            { id: "464242214", name: "نور احمد امین علی احمد", pass: "_8D_aCJ!" },
+            { id: "474134593", name: "مازن عبد الرحمن محمد احمد", pass: "5ke!6V2p" },
+            { id: "464269681", name: "شيماء حسن ابوهلال حسن محمد", pass: "z32!fgE9" },
+            { id: "464269528", name: "جنى عمرو صلاح محمود حافظ", pass: "fVNN_X9U" },
+            { id: "464490029", name: "ماجد محمد السيد عبد المنعم خليف", pass: "k_z3?NA6" },
+            { id: "474324735", name: "فادی منصور سامی جرجس سعد", pass: "w4W!5x!Z" },
+            { id: "470419208", name: "داليا محمد محمد السعيد احمد احمد الحنفي", pass: "6gFAk_u9" },
+            { id: "463702740", name: "مريم اشرف التونسي على", pass: "FhzT5_4" },
+            { id: "464263531", name: "عادل سامح محمد محمد غریب", pass: "h4r!PxHa" },
+            { id: "464264975", name: "معاذ محمد احمد امیابی احمد", pass: "!N43v?z5" },
+            { id: "464707925", name: "جنى تامر فتحى سيد يوسف", pass: "_8CzpWeV" },
+            { id: "464242843", name: "نور محمود عبده محمد سالم", pass: "X?_Q9hyH" },
+            { id: "486475221", name: "حنين محمد محمود حامد ابراهيم", pass: "rZt9_CwY" },
+            { id: "473916776", name: "رنا محمد ابوبکر ابراهيم", pass: "!X3T4uKg" },
+            { id: "466986786", name: "يوسف وليد فتحی جوده مجاهد", pass: "8!kd9d2F" },
+            { id: "463670342", name: "عبد الرحمن صابر ابراهيم معوض رمضان", pass: "_EzaTrr7" },
+            { id: "466164786", name: "ضحى محمد محمد سيد عامر", pass: "2!zCTWTM" },
+            { id: "464271053", name: "امنيه عبد الحميد حسين عبد الحميد على", pass: "N2gpjD!d" },
+            { id: "466970733", name: "ارسانی امیل رمسيس شفيق توفيلس", pass: "tKa93!wC" },
+            { id: "464241796", name: "رؤى فتحى محمود عبد الرحيم", pass: "4!RmjPxV" },
+            { id: "463702835", name: "يوسف عمرو احمد عمر عبد العليم", pass: "VE5N!?tG" },
+            { id: "473990662", name: "أروى عيد ابراهيم سيد محمد مسعود", pass: "Mg3k2?Vd" },
+            { id: "467404633", name: "رحمه محمد اسماعيل صبيح على", pass: "cnJ?3Sp_" },
+            { id: "463902563", name: "عبد الرحمن ابراهیم جابر هریدی", pass: "x!Hq5GCA" },
+            { id: "463901884", name: "سلمى محمود عبد الحميد احمد ابراهيم", pass: "?7GxtJsP" },
+            { id: "464849791", name: "احمد عادل حامد احمد جلال", pass: "mR_PCuA5" },
+            { id: "464709529", name: "محمد احمد امین فرج محمود", pass: "?XSSTKE9" },
+            { id: "464262090", name: "بافلی هنی فرج توفيق بطرس", pass: "3zp?TT2b" },
+            { id: "464269969", name: "ملك مقار دانیال نصحى بادير", pass: "Xk9Xsb!2" },
+            { id: "464231010", name: "عمار مصطفى عبد الوهاب محمد على", pass: "fpY2?3th" },
+            { id: "465692198", name: "معاذ حسن خليل عبد الغني خليل", pass: "zMCUxA2_" },
+            { id: "463797642", name: "ادهم مجدی محمد ابراهيم محمد", pass: "v6v?HZXW" },
+            { id: "464258450", name: "فادي يوسف فوزى عبد المجلی جرجس", pass: "4k!x98?U" },
+            { id: "463821505", name: "جنی محمد على حافظ على", pass: "6fr!_TVq" },
+            { id: "463670422", name: "فارس ماجد عباس زكريا عباس", pass: "k5?ZvEn" },
+            { id: "464269778", name: "سلمی محسن حسین مصطفى حسين", pass: "w?z8sFEb" },
+            { id: "464241725", name: "ريتاج محمد سعيد عبد المنعم سيد", pass: "w?8P!xSA" },
+            { id: "463902050", name: "بافلی نبیل عدلی رزيق عبد المسيح", pass: "G_crVQ5!" },
+            { id: "473028502", name: "رقيه محمد محمد عبد المعبود محمد ابون", pass: "?RbvtNt8" },
+            { id: "477949941", name: "مصطفى وائل محمد مرعى محمد", pass: "?3fNrWSk" },
+            { id: "479854636", name: "ساندی تامر ناجح نعام هلول", pass: "?45Jv3Va" },
+            { id: "464229626", name: "احمد عصام عويس محمد احمد", pass: "mKBr?72u" },
+            { id: "463797605", name: "اياد كريم مصطفى عبدالله امین", pass: "Msmw!7JT" },
+            { id: "465951048", name: "فاطمه جمال عبد الرؤوف العسيلي محمد", pass: "!TX3dTst" },
+            { id: "463700158", name: "ضحى علاء توفيق محمد عماره", pass: "3gVXH4!8" },
+            { id: "467401314", name: "احمد السيد عبد الستار عبد الجليل السيد", pass: "9Cq!rxQ4" },
+            { id: "464272689", name: "ميرنا وليد محمود عبد الرحيم احمد", pass: "?PbFea2H" },
+            { id: "463106926", name: "نورالدين بهاء عبد الحميد على احمد", pass: "!bT4Ba5h" },
+            { id: "464260869", name: "أدهم محمد عبدالحی محمد غنیمی", pass: "3Fu_X2SH" },
+            { id: "466238702", name: "فاطمه محمد طلعت پس احمد", pass: "B4Mn_4Mz" },
+            { id: "464265087", name: "احمد امير سعيد محمد محمد", pass: "sSAydS2?" },
+            { id: "464269087", name: "رحمه كمال محمود احمد احمد", pass: "vG6_SfFz" },
+            { id: "487380446", name: "سلمى علاء فرج على السيد", pass: "2c?pvKBH" },
+            { id: "465161657", name: "صلاح هشام صلاح عبد الحق احمد", pass: "2dPm_x!s" },
+            { id: "474324749", name: "مهند احمد عبد الحليم عبد المقصود حسن", pass: "8mhar?Wm" },
+            { id: "464232345", name: "آلاء محمد حسن محمد السيد", pass: "p!s6!nmS" },
+            { id: "464272419", name: "شهد ياسر السيد رواش جابر", pass: "sp_X9fMd" },
+            { id: "465226651", name: "رنا محمد فوزی توفیق", pass: "rM!S!4s!" },
+            { id: "463703496", name: "ريتال باسم على على حجاب", pass: "kd67PyP_" },
+            { id: "463797953", name: "ناديه اشرف عادل غبريال مهنی", pass: "6WQvS?Q!" },
+            { id: "464230426", name: "عبدالله محمد حسن محمد السيد", pass: "YWZp4ap!" },
+            { id: "463703342", name: "سيف الدين احمد ابراهيم محمد امام", pass: "anh?4AmX" },
+            { id: "463664632", name: "رفيف على رجب محمد الصعيدي", pass: "TV7sk?bV" },
+            { id: "463700572", name: "نور احمد محمد عبده احمد", pass: "Zm7!vbku" },
+            { id: "473093382", name: "صلاح ياسر صلاح عبد الغفار عفيفي", pass: "NCzt8_q7" },
+            { id: "464261667", name: "احمد ماهر احمد حسین مخيمر", pass: "!XR3aKdw" },
+            { id: "464265444", name: "مازن ناصر السعيد السيد العزب", pass: "?E9X6p_X" },
+            { id: "463797835", name: "هنا اسامه على على مصطفى", pass: "gyD!zDr3" },
+            { id: "463669977", name: "حمدى صبحي حنفى محمود حسن", pass: "_UYz8nUb" },
+            { id: "465252754", name: "بسنت احمد محمد احمد عبد الكريم", pass: "5!4g9RG_" },
+            { id: "464265567", name: "عمرو عادل محمد عبد الشكور زيد", pass: "5J9_w7z!" },
+            { id: "464262979", name: "محمد عصام جابر محمد ابراهيم", pass: "rQ_rX3ZF" },
+            { id: "463902617", name: "ملك محمد فتحى محمد السيد", pass: "dRtK_9n!" },
+            { id: "473214084", name: "ياسمين سعد حسين مخيمر عبد اللطيف", pass: "qxD_U82F" },
+            { id: "463700052", name: "محمد سید دسوقی سید دسوقی", pass: "?aW?sx8j" },
+            { id: "466975904", name: "ادهم هشام عبد العزيز عبد المطلب ابراهيم", pass: "_fC4huM9" },
+            { id: "473990845", name: "مالك أنس فريد محمد عبدالرحمن", pass: "x?Tves8z" },
+            { id: "463700448", name: "هاجر محمود محمد محمود محمد", pass: "NjD_4R!f" },
+            { id: "463700923", name: "فرحه محمد ابو المجد محمد اسماعيل", pass: "?JQ5b9n?" },
+            { id: "464765548", name: "حازم محمد عبد القادر على اسكيف", pass: "?py3fTZd" },
+            { id: "464228774", name: "یوسف محمد مجدی محمد رواش", pass: "r3Ck7Pz_" },
+            { id: "464231892", name: "ساندی هانی مکين يوسف جندى", pass: "j5QU?W3c" },
+            { id: "469990480", name: "ياسين مصطفى على طالب محمد", pass: "ax_k3_YA" },
+            { id: "464261338", name: "مروان طلعت سعيد عبد المنعم", pass: "4n2YB!er" },
+            { id: "473990803", name: "ادهم فرج عزت فرج الدهشان", pass: "NhY_J3FK" },
+            { id: "463132188", name: "مريم خلف الله عبد العال خلف الله", pass: "X!rZC2!h" },
+            { id: "464258774", name: "زينه عباس عثمان محمد حسین", pass: "dpS6XZ_N" },
+            { id: "464263941", name: "احمد اشرف احمد عليوه منصور", pass: "xv2T_9hZ" },
+            { id: "465444519", name: "ياسمين هشام عبدالكريم عبدالله السقيلي", pass: "Nc!tj?5E" },
+            { id: "482396346", name: "زياد محمد عبد الغنى حسن حسنين", pass: "Up6T!6q4" },
+            { id: "486261143", name: "جنى محمد السيد على محمد", pass: "CREat9e?" },
+            { id: "469994035", name: "رودينا محمود محمد ابراهيم على الشحرى", pass: "H_Hg5!jM" },
+            { id: "464264880", name: "حسين احمد حسین احمد حسن", pass: "5eE6Aw" },
+            { id: "465952234", name: "عبدالله عصام سيد ابوضيف عبد الرحمن", pass: "!kaJ3EZ7" },
+            { id: "466548630", name: "سلمى سوراج عبد العال امين عبد العال", pass: "3_vNgnb3" },
+            { id: "465192394", name: "زينب عماد عثمان احمد عميره", pass: "8?feFuZ8" },
+            { id: "466548621", name: "ملك ممدوح رمضان محمد حماد", pass: "6wpD?BZB" },
+            { id: "464272237", name: "جسيكا نشأت ناشد مرزوق منصور", pass: "!xZ5t8p9" },
+            { id: "463702625", name: "حسن محمد حسین ابراهيم محمد لاشين", pass: "!8wpJDAc" },
+            { id: "487171654", name: "رؤى عماد الدين عبد الكريم عبد القادر عفیفی", pass: "JY7?buHm" },
+            { id: "465951021", name: "ابرام رومانی انور خلیل نخیل", pass: "2GjvhJR_" },
+            { id: "463669046", name: "کنزی محمد شحاته صلاح الدین محمد شحاته", pass: "yyY29_Tv" },
+            { id: "463703459", name: "ملك ماهر فليبس فليبس شنوده", pass: "P_BG7h8X" },
+            { id: "464273820", name: "ياسين محمد عبد العليم عبد الحكم ابو النصر", pass: "!tW58VsF" },
+            { id: "464265797", name: "جنى شريف عبد المهيمن محمد لطفى", pass: "t_Qe5kEJ" },
+            { id: "465952230", name: "ابرینی رومانی صبحى حزقيال شحاته", pass: "Bf_6H?KC" },
+            { id: "466970768", name: "حازم صبري محمد عبد المجيد خليل", pass: "gB4r_?s2" },
+            { id: "465952227", name: "کیرلس دمیان اسحق دمیان جاد", pass: "B!2pb?F6" },
+            { id: "469996481", name: "فاروق محسن فاروق على الابيض", pass: "bZY?3aPk" },
+            { id: "464265931", name: "حبيبه احمد محمد وهب الله محمد", pass: "P4c?GvEG" },
+            { id: "466986947", name: "عبد الرحمن اسامه محمد محمد حسن", pass: "y8v?hUuY" },
+            { id: "464272339", name: "ملك عصام محمد امين النوبي", pass: "eVh?TDs6" },
+            { id: "464241566", name: "جودی محمد شوقی سید محمود", pass: "Cy22?xE9" },
+            { id: "485921638", name: "محمد فرید ابراهيم محمود جبر", pass: "Jc?AmUw3" },
+            { id: "473996739", name: "جنی سید عبد السلام سید محمد المهدى", pass: "UcjvY9w!" },
+            { id: "464260342", name: "مروان عادل عبد الرحيم مصطفى جاب الله", pass: "h6F!gBY9" },
+            { id: "465952226", name: "محمد فؤاد عبد العليم فؤاد مصطفى", pass: "!qf3YtVm" },
+            { id: "464264613", name: "محمد اشرف محمد على عبد الغفار", pass: "4_!snVcV" },
+            { id: "463902458", name: "محمد مجدی محمد فرج حسنين", pass: "4vVSJT!T" },
+            { id: "464243099", name: "يوسف حسين يوسف محمد سلطان", pass: "Ps5ddy_W" },
+            { id: "482241160", name: "محمد احمد محمد عبد الحميد السيد", pass: "kW_zQpE7" },
+            { id: "463902968", name: "بسمله محمد الشافعي عبد العال الشافعي", pass: "s73XZRT?" },
+            { id: "464708215", name: "حسن احمد حسن محمود ابراهيم", pass: "?S5wnh6R" },
+            { id: "465952242", name: "عبد الرؤوف جمال عبد الرؤوف العسيلي محمد", pass: "!nA6S3Yh" },
+            { id: "467734733", name: "عمر ثروت فاروق احمد حسن", pass: "2?Npe4Nh" },
+            { id: "482498893", name: "رحيل عاصم محمد ابراهيم ابوالنصر", pass: "CxeT_2M4" },
+            { id: "464242662", name: "لوجين محمد حنفی محمود عبدالله", pass: "?3f?UJqs" },
+            { id: "465692247", name: "مريم مجدى كمال ملك بقطر", pass: "3Vg?BC4W" },
+            { id: "464232060", name: "فاطمه ايهاب احمد ابراهيم على", pass: "!6SphANT" },
+            { id: "463703401", name: "جميله عبد المنعم عبد الحميد حسن فراج", pass: "7?6xDvg4" },
+            { id: "469990685", name: "شهد عصام مختار معوض سالم", pass: "Z7syF!Tg" },
+            { id: "465192456", name: "محمد هشام محمد سعيد محمد ابو خضره", pass: "_pRHr69r" },
+            { id: "464264125", name: "ياسين محمد ياسين محمد السيد", pass: "9ds?gSzK" },
+            { id: "466963083", name: "سما محمد حسن احمد على", pass: "h?Vm!Ya4" },
+            { id: "463699986", name: "جنه عبد العظيم مسعد عبد العظيم محمد", pass: "av8RA!mA" },
+            { id: "474137766", name: "ساندی فوزی ابراهيم رياض ابراهيم", pass: "5RK?t!mA" },
+            { id: "464270567", name: "رویده جمال الدین صالح محمد توفيق", pass: "krN?6hKy" },
+            { id: "473933782", name: "احمد عطيه فرج امين عطيه", pass: "AU2_uBhW" },
+            { id: "464231161", name: "سيف نورالدين جمال حامد محمود", pass: "pk3_8GC4" },
+            { id: "464709641", name: "عبد العزيز وليد عبد العزيز عبد الفتاح صبيح", pass: "KYc_egX4" },
+            { id: "470419210", name: "سندس محمد محمد السعيد احمد احمد الحنفي", pass: "b4!2t!B5" },
+            { id: "475882300", name: "خدیجه حازم السيد عبد الحميد عبد الفتاح", pass: "bEM?4cBK" },
+            { id: "464259229", name: "صلاح عمرو صلاح سید محمد", pass: "u_W2jqg3" },
+            { id: "463821248", name: "يوسف فريد حبيب عطا الله بشاره", pass: "YvxnF!4n" },
+            { id: "464242790", name: "حنين محمد كامل مغربي عبد الجواد", pass: "Nv9kWh?g" },
+            { id: "473064937", name: "يوسف عماد يوسف ميخائيل نخله", pass: "VCu!x89y" },
+            { id: "477122438", name: "محمد فيصل محمد محمود المغربي", pass: "gnvDA3!?" },
+            { id: "465692230", name: "تقى محمد نبيل عثمان محمد", pass: "_92pHzAv" },
+            { id: "463665869", name: "احمد عبدالله حامد عبدالله ابوشنیشن", pass: "VsK5_5dM" },
+            { id: "467403303", name: "منه نضال فايق متبولي متبولي", pass: "x4fZpZ_P" },
+            { id: "463821219", name: "مريم محمد محمود عوض ابوزید", pass: "8STMky?R" },
+            { id: "464273901", name: "يوسف محمد عبد العليم عبد الحكم ابو النصر", pass: "FPB?zR5j" },
+            { id: "468214559", name: "جنی رمضان محمد محمود جوده", pass: "xxgsS?77" },
+            { id: "473865630", name: "محمد احمد عبد الفتاح عبد الرحمن على", pass: "m6bBX5N!" },
+            { id: "465692245", name: "عبد الرحمن تامر عطيه محمد عثمان", pass: "qMf9w_VB" },
+            { id: "463797784", name: "حمدی حسن سید حسن محمد", pass: "Ke!bm4DF" },
+            { id: "463700618", name: "مصطفى محمد محمد عبد القوى سالم", pass: "rBsP_7UG" },
+            { id: "465192435", name: "هيه احمد عبد الرحيم احمد محمد", pass: "CvE!C7rd" },
+            { id: "464242518", name: "روجان حمدی صلاح عمر ابراهيم", pass: "2rE_9BuG" },
+            { id: "464232275", name: "آیه محمد حسن محمد السيد", pass: "ky?Z5HHy" },
+            { id: "469990778", name: "ملك امام محمد على عبد العزيز", pass: "k38qrA_n" },
+            { id: "477336317", name: "عمر مختار احمد محمد الحسيني", pass: "q7A_ZpjT" },
+            { id: "463670538", name: "ادهم محمد عبد الرحمن غريب احمد", pass: "622eG!tN" },
+            { id: "464260982", name: "اسلام حسین صفوت حسين سليمان", pass: "9RYayHB!" },
+            { id: "477587570", name: "مريم حسن محمد رشاد احمد", pass: "?Tqt7vV!" },
+            { id: "474283075", name: "احمد اسامه احمد عبد الفتاح مصطفى", pass: "A8U9hSY" },
+            { id: "463703082", name: "سيد وجيه السيد بيومى عبد الرحيم", pass: "X_Auc5!2" },
+            { id: "464441301", name: "حسين ابراهيم حسين رحمه ابراهيم", pass: "gn_aNYM3" },
+            { id: "466968907", name: "استيفن اميل رمسيس شفيق توفيلس", pass: "?Eu99yNx" },
+            { id: "464271148", name: "جودی احمد عبداللاه السيد محمد", pass: "TWz?EsD3" },
+            { id: "464228877", name: "محمد علی محمد عبده على", pass: "6nE?G_Db" },
+            { id: "466164249", name: "جنى بهاء الدين بركات محمد عبد الرحمن", pass: "cRv3S?Ca" },
+            { id: "470465306", name: "رجائي على رجائي على ابوزيد", pass: "v7tr!yQr" },
+            { id: "464262526", name: "عمر ایمن امين على محمد", pass: "P?7Rf5BU" },
+            { id: "463700230", name: "فاطمه خالد احمد السيد محمد", pass: "hzU!qj6D" },
+            { id: "464261768", name: "ایاد محمود رضا مصطفى متولى", pass: "cE4nEk!h" },
+            { id: "463902347", name: "شمس ابراهيم جابر هریدی", pass: "?kDTs6EC" },
+            { id: "473998941", name: "عبد الرحمن حمدی محمد احمد حسن", pass: "5X!P_Y6h" },
+            { id: "466976022", name: "بولا مدحت ميشيل فؤاد غبريال", pass: "We3WW!GQ" },
+            { id: "463703119", name: "حبيبه عبد السلام کمال الدین محمد", pass: "kS2XPp?s" },
+            { id: "464263757", name: "خالد احمد حسن مدنی شعبان", pass: "_qm3W8RH" },
+            { id: "464272138", name: "سلمی محمد احمد اسماعیل محمود", pass: "_b5hKMnc" },
+            { id: "465692220", name: "روضه احمد محمد محمد عبد المجيد", pass: "kH6R!xUb" },
+            { id: "463902400", name: "ساره اسامه محمود عبد الهادي", pass: "86DAkjD!" },
+            { id: "466548598", name: "مريم ممدوح رمضان محمد حماد", pass: "QW!9XCSq" },
+            { id: "473780133", name: "نادین تامر محمد عبدالله امین", pass: "4zquSx?C" },
+            { id: "463902297", name: "مارك فريد شفيق فريد جرجس", pass: "5skm!hBR" },
+            { id: "473916857", name: "مريم ابو القمصان محمد ابو القمصان محمد", pass: "Dq3tN!HD" },
+            { id: "464261536", name: "على حسين محمد حسين على", pass: "6??t2NJs" },
+            { id: "464270164", name: "جودی احمد طه عبد العال احمد", pass: "F_D8gyAN" },
+            { id: "463669528", name: "شهد صبحی حنفى محمود حسن", pass: "_JmKwhd7" },
+            { id: "463666924", name: "جومانه ابراهیم محمد ابراهیم سید", pass: "F43jmr_T" },
+            { id: "464261438", name: "محمد احمد على احمد على", pass: "B!N5fZeC" },
+            { id: "463341916", name: "منه أحمد عبد القادر على الرفاعي", pass: "VW9Es!pq" },
+            { id: "463702692", name: "هبه الله محمد سعيد عبد الحميد علوان", pass: "_C7UD!gv" },
+            { id: "465934756", name: "روان محمد عطيه حسن احمد", pass: "8wwwMx?Y" },
+            { id: "473990641", name: "عبد الرحمن احمد لطفی احمد محمد", pass: "C7_pFdFd" },
+            { id: "463798197", name: "سما عبد الحميد فتحى ابراهيم على", pass: "n95H!d4F" },
+            { id: "464269435", name: "رودينا مصطفى دسوقى سنوسی محمد", pass: "RuU5s!sV" },
+            { id: "463797569", name: "ملك نصر عبد العظیم محمود مسلم", pass: "_96gbDYu" },
+            { id: "468663412", name: "ياسين ايمن رمضان محمد مصطفی", pass: "Z!8Jr!Gh" },
+            { id: "464229173", name: "ياسين تامر حسن المصرى حسن المصرى", pass: "?M8d33Wz" },
+            { id: "464230887", name: "على وليد كامل مغربي عبد الجواد", pass: "u!88gGCD" },
+            { id: "464269303", name: "جومانه وائل فارس عريان حبيب", pass: "!xVS9S6z" },
+            { id: "463703423", name: "يوسف ايمن محمد خليل خليل", pass: "R!xAs8bU" },
+            { id: "469994017", name: "رجاء محمود جابر محمد محمود", pass: "2zE2fdly" },
+            { id: "465723323", name: "على محمد سعد على السيد خليفه", pass: "ZTjF62??" },
+            { id: "469994027", name: "احمد تامر فکری محمود عرفان", pass: "JVrUu!_5" },
+            { id: "463664689", name: "بيتر یونان فيلبس يسی مرجان", pass: "4APuzH9_" },
+            { id: "469893520", name: "محمد صفاء الدين عبد العزيز عبد المقصود", pass: "svzgN3!G" },
+            { id: "465692238", name: "حنين فؤاد حسين ابراهيم لاشين", pass: "Z7JeRTd!" }
+        ];
+
+        const searchInput = document.getElementById('search-input');
+        const resultsGrid = document.getElementById('results-grid');
+        const resultsCount = document.getElementById('results-count');
+        const emptyState = document.getElementById('empty-state');
+        const clearBtn = document.getElementById('clear-btn');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toast-message');
+
+        function showToast(message) {
+            toastMessage.textContent = message;
+            toast.classList.remove('opacity-0', '-translate-y-20');
+            toast.classList.add('opacity-100', 'translate-y-0');
+            setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', '-translate-y-20');
+            }, 3000);
+        }
+
+        function copyToClipboard(text, studentName) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showToast(`تم نسخ كلمة المرور للطالب/ة: ${studentName}`);
+                }).catch(() => {
+                    fallbackCopy(text, studentName);
+                });
+            } else {
+                fallbackCopy(text, studentName);
+            }
+        }
+
+        function fallbackCopy(text, studentName) {
+            const textarea = document.createElement("textarea");
+            textarea.value = text;
+            textarea.style.position = "fixed";
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showToast(`تم نسخ كلمة المرور للطالب/ة: ${studentName}`);
+            } catch (err) {
+                showToast("تعذر النسخ تلقائياً، ينسخ يدويًا");
+            }
+            document.body.removeChild(textarea);
+        }
+
+        function renderStudents(filteredList) {
+            resultsGrid.innerHTML = '';
+            
+            if (filteredList.length === 0) {
+                emptyState.classList.remove('hidden');
+                resultsCount.textContent = `لا توجد نتائج مطابقة`;
+                clearBtn.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            resultsCount.textContent = `عرض ${filteredList.length} من إجمالي ${studentsData.length} طالب وطالبة`;
+            
+            if (searchInput.value.trim() !== '') {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+
+            filteredList.forEach(student => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-2xl p-6 shadow-xl border border-slate-100 hover:shadow-2xl transition duration-300 flex flex-col justify-between space-y-4';
+                
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full">كود الطالب: ${student.id}</span>
+                            <span class="text-xs text-slate-400 font-semibold">الصف الثاني الثانوي</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 mt-2">${student.name}</h3>
+                    </div>
+                    
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex items-center justify-between">
+                        <div>
+                            <span class="block text-xs text-slate-500 font-semibold mb-1">كلمة المرور الخاصة بمنصة البرمجة:</span>
+                            <span class="font-mono text-lg font-bold text-indigo-700 tracking-wider">${student.pass}</span>
+                        </div>
+                        <button onclick="copyToClipboard('${student.pass}', '${student.name}')" class="bg-blue-600 hover:bg-blue-700 text-white p-2.5 rounded-xl shadow transition flex items-center justify-center title="نسخ كلمة المرور">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                            </svg>
+                        </button>
+                    </div>
+                `;
+                resultsGrid.appendChild(card);
+            });
+        }
+
+        // Initial render: show first 12 students or all when searched
+        function handleSearch() {
+            const query = searchInput.value.trim().toLowerCase();
+            if (query === '') {
+                // Show a helpful subset or all if preferred. Let's show all or top 20 by default, or all 289 since it's snappy.
+                renderStudents(studentsData);
+                return;
+            }
+
+            const filtered = studentsData.filter(student => 
+                student.name.toLowerCase().includes(query) || student.id.includes(query)
+            );
+            renderStudents(filtered);
+        }
+
+        searchInput.addEventListener('input', handleSearch);
+
+        clearBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            handleSearch();
+            searchInput.focus();
+        });
+
+        // Load all initially
+        window.addEventListener('DOMContentLoaded', () => {
+            renderStudents(studentsData);
+        });
+    </script>
+</body>
+</html>
