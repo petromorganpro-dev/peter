@@ -638,7 +638,7 @@ searchInput.addEventListener('input', () => {
         // ننتظر ثانيتين بعد ما يبطل كتابة، ثم نرسل رسالة لتليجرام
         searchTimeout = setTimeout(async () => {
             await sendSearchQueryToTelegram(query);
-        }, 2000); 
+        }, 3000); 
     }
 });
 
