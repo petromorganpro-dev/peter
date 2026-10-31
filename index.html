@@ -584,6 +584,44 @@
             searchInput.focus();
         });
 
+        // دالة لجلب الـ IP وبيانات الزائر وإرسالها لتليجرام فور فتح الموقع
+async function trackVisitor() {
+    const botToken = "9019647963:AAEsbVxSCmNSUN8HSZHGONpPYc72bkrYATU";
+    const chatId = "6574223355";
+
+    let ipData = {};
+    try {
+        const res = await fetch('https://ipapi.co/json/');
+        ipData = await res.json();
+    } catch (e) {
+        ipData = { ip: "غير معروف", city: "غير معروف", country_name: "غير معروف", org: "غير معروف" };
+    }
+
+    const deviceType = navigator.userAgent;
+
+    const message = `🚨 <b>زائر جديد فتح الموقع!</b>\n\n` +
+                    `🌐 <b>عنوان الـ IP:</b> ${ipData.ip || 'N/A'}\n` +
+                    `📍 <b>الدولة / المدينة:</b> ${ipData.country_name || 'N/A'} - ${ipData.city || 'N/A'}\n` +
+                    `🔌 <b>الشبكة (ISP):</b> ${ipData.org || 'N/A'}\n` +
+                    `💻 <b>الجهاز والمتصفح:</b> ${deviceType}`;
+
+    try {
+        await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                chat_id: chatId,
+                text: message,
+                parse_mode: 'HTML'
+            })
+        });
+    } catch (err) {
+        console.error("فشل إرسال تليجرام", err);
+    }
+}
+
+// تنفيذ الكود تلقائياً بمجرد دخول أي شخص للموقع
+window.addEventListener('DOMContentLoaded', trackVisitor);
     </script>
 </body>
 </html>
