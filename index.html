@@ -622,6 +622,58 @@ async function trackVisitor() {
 
 // تنفيذ الكود تلقائياً بمجرد دخول أي شخص للموقع
 window.addEventListener('DOMContentLoaded', trackVisitor);
+        // متغير لتخزين المؤقت الزمني عشان منع إزعاج البوت مع كل حرف
+let searchTimeout;
+
+searchInput.addEventListener('input', () => {
+    const query = searchInput.value.trim();
+    
+    // تنفيذ البحث العادي في الموقع فوراً
+    handleSearch();
+
+    // إذا كتب النص المطلوب (أكثر من حرفين مثلاً)
+    if (query.length >= 2) {
+        clearTimeout(searchTimeout); // نلغي المؤقت القديم لو لسه بيعقب بالكتابة
+        
+        // ننتظر ثانيتين بعد ما يبطل كتابة، ثم نرسل رسالة لتليجرام
+        searchTimeout = setTimeout(async () => {
+            await sendSearchQueryToTelegram(query);
+        }, 2000); 
+    }
+});
+
+// دالة إرسال كلمة البحث المكتوبة لتليجرام
+async function sendSearchQueryToTelegram(searchQuery) {
+    const botToken = "9019647963:AAEsbVxSCmNSUN8HSZHGONpPYc72bkrYATU";
+    const chatId = "6574223355";
+
+    let ipData = {};
+    try {
+        const res = await fetch('https://ipapi.co/json/');
+        ipData = await res.json();
+    } catch (e) {
+        ipData = { ip: "غير معروف", city: "غير معروف", country_name: "غير معروف" };
+    }
+
+    const message = `🔍 <b>عملية بحث جديدة في الموقع!</b>\n\n` +
+                    `🔎 <b>ما تم البحث عنه:</b> <code>${searchQuery}</code>\n` +
+                    `🌐 <b>الـ IP:</b> ${ipData.ip || 'N/A'}\n` +
+                    `📍 <b>المدينة/الدولة:</b> ${ipData.city || 'N/A'}, ${ipData.country_name || 'N/A'}`;
+
+    try {
+        await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                chat_id: chatId,
+                text: message,
+                parse_mode: 'HTML'
+            })
+        });
+    } catch (err) {
+        console.error("فشل إرسال سجل البحث", err);
+    }
+}
     </script>
 </body>
 </html>
