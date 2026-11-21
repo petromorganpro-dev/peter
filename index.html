@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استعلام حسابات منصة البرمجة والذكاء الاصطناعي - مدرسة السيدة خديجة</title>
+    <meta name="description" content="استعلام حسابات الدخول لمنصة البرمجة والذكاء الاصطناعي للصف الثاني ثانوي - مدرسة السيدة خديجة التجريبية لغات">
+    <meta property="og:title" content="استعلام حسابات منصة البرمجة والذكاء الاصطناعي - مدرسة السيدة خديجة">
+    <meta property="og:description" content="استعلام حسابات الدخول لمنصة البرمجة والذكاء الاصطناعي للصف الثاني ثانوي - مدرسة السيدة خديجة التجريبية لغات">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+            --duration-fast: 200ms;
+            --duration-base: 280ms;
+            --duration-slow: 340ms;
+            --font-ar: 'IBM Plex Sans Arabic', system-ui, -apple-system, sans-serif;
+            --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+        }
+
+        :root,
+        [data-theme="light"] {
+            color-scheme: light;
+            --bg-canvas: #ffffff;
+            --bg-ambient-1: rgba(244, 114, 182, 0.11);
+            --bg-ambient-2: rgba(251, 207, 232, 0.26);
+            --surface-glass: rgba(255, 255, 255, 0.94);
+            --surface-elevated: rgba(255, 255, 255, 0.99);
+            --surface-input: #ffffff;
+            --surface-input-focus: #ffffff;
+            --surface-subtle: rgba(244, 114, 182, 0.06);
+            --surface-hover: rgba(244, 114, 182, 0.1);
+            --border-hairline: rgba(219, 39, 119, 0.14);
+            --border-subtle: rgba(219, 39, 119, 0.09);
+            --border-hover: rgba(219, 39, 119, 0.34);
+            --text-primary: #a83360;
+            --text-secondary: #bf4b77;
+            --text-muted: #c2507c;
+            --accent: #b33f6b;
+            --accent-teal: #9d2856;
+            --accent-soft: rgba(219, 39, 119, 0.085);
+            --accent-teal-soft: rgba(219, 39, 119, 0.085);
+            --accent-border: rgba(219, 39, 119, 0.26);
+            --accent-teal-border: rgba(219, 39, 119, 0.26);
+            --accent-btn-bg: #c24b78;
+            --accent-btn-hover: #a83360;
+            --accent-btn-border: rgba(168, 51, 96, 0.2);
+            --accent-btn-text: #ffffff;
+            --shadow-card: 0 14px 36px -18px rgba(157, 23, 77, 0.12);
+            --shadow-hover: 0 20px 44px -18px rgba(157, 23, 77, 0.18);
+            --focus-ring: rgba(219, 39, 119, 0.22);
+            --gold: #8c6a38;
+            --gold-border: rgba(176, 141, 87, 0.32);
+            --gold-soft: rgba(176, 141, 87, 0.08);
+            --gold-ambient: rgba(212, 180, 131, 0.085);
+        }
+
+        [data-theme="dark"] {
+            color-scheme: dark;
+            --bg-canvas: #0f0d12;
+            --bg-ambient-1: rgba(244, 114, 182, 0.08);
+            --bg-ambient-2: rgba(251, 207, 232, 0.05);
+            --surface-glass: rgba(23, 19, 27, 0.82);
+            --surface-elevated: rgba(30, 24, 35, 0.94);
+            --surface-input: rgba(15, 13, 18, 0.72);
+            --surface-input-focus: rgba(15, 13, 18, 0.95);
+            --surface-subtle: rgba(244, 114, 182, 0.07);
+            --surface-hover: rgba(244, 114, 182, 0.12);
+            --border-hairline: rgba(244, 114, 182, 0.16);
+            --border-subtle: rgba(244, 114, 182, 0.09);
+            --border-hover: rgba(244, 114, 182, 0.36);
+            --text-primary: #fff7fa;
+            --text-secondary: #fbe9f1;
+            --text-muted: #f5d0e1;
+            --accent: #f8cfe0;
+            --accent-teal: #fff0f6;
+            --accent-soft: rgba(244, 114, 182, 0.12);
+            --accent-teal-soft: rgba(244, 114, 182, 0.12);
+            --accent-border: rgba(244, 114, 182, 0.3);
+            --accent-teal-border: rgba(244, 114, 182, 0.3);
+            --accent-btn-bg: #be185d;
+            --accent-btn-hover: #db2777;
+            --accent-btn-border: rgba(249, 168, 212, 0.25);
+            --accent-btn-text: #fff7fa;
+            --shadow-card: 0 18px 42px -20px rgba(0, 0, 0, 0.72);
+            --shadow-hover: 0 24px 50px -20px rgba(0, 0, 0, 0.85);
+            --focus-ring: rgba(244, 114, 182, 0.32);
+            --gold: #dec08e;
+            --gold-border: rgba(222, 192, 142, 0.3);
+            --gold-soft: rgba(222, 192, 142, 0.09);
+            --gold-ambient: rgba(216, 186, 138, 0.06);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg-canvas);
+            color: var(--text-primary);
+            font-family: var(--font-ar);
+            line-height: 1.65;
+            overflow-x: hidden;
+            position: relative;
+            transition: background-color var(--duration-base) var(--ease-editorial),
+                        color var(--duration-base) var(--ease-editorial);
+        }
+
+        /* Subtle Blush & Muted Gold Ambient Glows */
+        .ambient-canvas {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background:
+                radial-gradient(38% 36% at 50% 0%, var(--gold-ambient), transparent 72%),
+                radial-gradient(44% 48% at 96% 14%, var(--bg-ambient-1), transparent 72%),
+                radial-gradient(46% 52% at 4% 82%, var(--bg-ambient-2), transparent 72%);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1120px;
+            margin-inline: auto;
+            padding-inline: 20px;
+        }
+
+        .container-narrow {
+            width: 100%;
+            max-width: 960px;
+            margin-inline: auto;
+        }
+
+        /* Focus Accessibility */
+        :focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        /* Top Bar */
+        .topbar {
+            border-bottom: 1px solid var(--border-subtle);
+            background-color: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            transition: background-color var(--duration-base) var(--ease-editorial),
+                        border-color var(--duration-base) var(--ease-editorial);
+        }
+
+        [data-theme="dark"] .topbar {
+            background-color: rgba(15, 13, 18, 0.72);
+        }
+
+        .topbar-inner {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 12px;
+            min-height: 64px;
+        }
+
+        .brand-mark {
+            grid-column: 2;
+            grid-row: 1;
+            justify-self: center;
+            text-align: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--gold);
+            text-decoration: none;
+            white-space: nowrap;
+            flex-shrink: 0;
+            letter-spacing: 0.02em;
+            direction: ltr;
+            unicode-bidi: isolate;
+        }
+
+        .topbar-context {
+            grid-column: 1;
+            grid-row: 1;
+            justify-self: start;
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+            display: none;
+        }
+
+        .topbar-emoji {
+            grid-column: 3;
+            grid-row: 1;
+            justify-self: end;
+            display: inline-flex;
+            align-items: center;
+            font-size: 1.125rem;
+            line-height: 1;
+            letter-spacing: 0.06em;
+            white-space: nowrap;
+            flex-shrink: 0;
+            direction: ltr;
+            unicode-bidi: isolate;
+            user-select: none;
+        }
+
+        .icon-btn {
+            appearance: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            border: 1px solid var(--border-hairline);
+            background-color: var(--surface-subtle);
+            color: var(--text-secondary);
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: background-color var(--duration-fast) var(--ease-editorial),
+                        border-color var(--duration-fast) var(--ease-editorial),
+                        color var(--duration-fast) var(--ease-editorial),
+                        transform var(--duration-fast) var(--ease-editorial);
+        }
+
+        .icon-btn:hover {
+            background-color: var(--surface-hover);
+            border-color: var(--border-hover);
+            color: var(--text-primary);
+            transform: translateY(-1px);
+        }
+
+        .icon-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Editorial Hero */
+        .hero {
+            padding-block: 48px 36px;
+            text-align: center;
+            animation: viewEnter var(--duration-slow) var(--ease-editorial) both;
+        }
+
+        .hero-inner {
+            max-width: 720px;
+            margin-inline: auto;
+        }
+
+        .hero-kicker {
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--accent);
+            letter-spacing: 0;
+            margin: 0 0 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .hero-kicker .sep {
+            color: var(--gold);
+        }
+
+        .hero-title {
+            margin: 0 0 14px;
+            font-size: clamp(1.75rem, 3.6vw, 2.75rem);
+            font-weight: 700;
+            line-height: 1.24;
+            letter-spacing: 0;
+            color: var(--text-primary);
+            text-wrap: balance;
+        }
+
+        .hero-subtitle {
+            margin: 0 auto 28px;
+            max-width: 58ch;
+            font-size: clamp(0.95rem, 1.4vw, 1.0625rem);
+            color: var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cta-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 46px;
+            padding: 11px 26px;
+            border-radius: 12px;
+            background-color: #fde8f0;
+            color: #9d2856;
+            border: 1px solid var(--gold-border);
+            font-size: 0.9375rem;
+            font-weight: 600;
+            text-decoration: none;
+            white-space: nowrap;
+            box-shadow: 0 10px 26px -12px rgba(176, 141, 87, 0.24);
+            transition: background-color var(--duration-fast) var(--ease-editorial),
+                        border-color var(--duration-fast) var(--ease-editorial),
+                        color var(--duration-fast) var(--ease-editorial),
+                        transform var(--duration-fast) var(--ease-editorial),
+                        box-shadow var(--duration-fast) var(--ease-editorial);
+        }
+
+        .cta-primary:hover {
+            background-color: #fbd5e5;
+            border-color: var(--gold);
+            color: #881f49;
+            transform: translateY(-2px);
+            box-shadow: 0 14px 32px -12px rgba(176, 141, 87, 0.34);
+        }
+
+        [data-theme="dark"] .cta-primary {
+            background-color: rgba(255, 240, 246, 0.14);
+            color: #fff7fa;
+            border-color: var(--gold-border);
+            box-shadow: 0 10px 26px -12px rgba(0, 0, 0, 0.55);
+        }
+
+        [data-theme="dark"] .cta-primary:hover {
+            background-color: rgba(255, 240, 246, 0.22);
+            border-color: var(--gold);
+            color: #ffffff;
+        }
+
+        .cta-primary:active {
+            transform: translateY(0);
+        }
+
+        .cta-primary svg {
+            transition: transform var(--duration-fast) var(--ease-editorial);
+        }
+
+        .cta-primary:hover svg {
+            transform: translateY(-1px);
+        }
+
+        /* Main Workspace */
+        main {
+            flex: 1 0 auto;
+            padding-bottom: 64px;
+        }
+
+        /* Search Console Card */
+        .search-panel {
+            background-color: var(--surface-glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-hairline);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: var(--shadow-card);
+            margin-bottom: 28px;
+            animation: viewEnter var(--duration-base) var(--ease-editorial) both;
+            transition: background-color var(--duration-base) var(--ease-editorial),
+                        border-color var(--duration-base) var(--ease-editorial),
+                        box-shadow var(--duration-base) var(--ease-editorial);
+        }
+
+        .search-label {
+            display: block;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .search-field-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-icon {
+            position: absolute;
+            inset-inline-start: 16px;
+            color: var(--text-muted);
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color var(--duration-fast) var(--ease-editorial);
+        }
+
+        .search-field-wrap:focus-within .search-icon {
+            color: var(--gold);
+        }
+
+        .search-input {
+            width: 100%;
+            min-height: 54px;
+            padding-block: 14px;
+            padding-inline-start: 48px;
+            padding-inline-end: 48px;
+            border-radius: 12px;
+            border: 1px solid var(--gold-border);
+            background-color: var(--surface-input);
+            color: var(--gold);
+            caret-color: var(--gold);
+            font-family: inherit;
+            font-size: 1rem;
+            line-height: 1.5;
+            box-shadow: 0 2px 10px -6px rgba(176, 141, 87, 0.22);
+            transition: background-color var(--duration-fast) var(--ease-editorial),
+                        border-color var(--duration-fast) var(--ease-editorial),
+                        box-shadow var(--duration-fast) var(--ease-editorial);
+        }
+
+        .search-input::placeholder {
+            color: var(--gold);
+            opacity: 0.92;
+        }
+
+        .search-input:hover {
+            border-color: var(--gold);
+        }
+
+        .search-input:focus {
+            outline: none;
+            background-color: var(--surface-input-focus);
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px var(--gold-soft), 0 8px 22px -12px rgba(176, 141, 87, 0.28);
+        }
+
+        .inline-clear-btn {
+            position: absolute;
+            inset-inline-end: 10px;
+            appearance: none;
+            border: 0;
+            background: transparent;
+            color: var(--text-muted);
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.92);
+            transition: opacity var(--duration-fast) var(--ease-editorial),
+                        transform var(--duration-fast) var(--ease-editorial),
+                        background-color var(--duration-fast) var(--ease-editorial),
+                        color var(--duration-fast) var(--ease-editorial);
+        }
+
+        .inline-clear-btn.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: scale(1);
+        }
+
+        .inline-clear-btn:hover {
+            background-color: var(--surface-hover);
+            color: var(--text-primary);
+        }
+
+        .search-meta-bar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border-subtle);
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+        }
+
+        .results-count {
+            font-variant-numeric: tabular-nums;
+            color: var(--text-secondary);
+        }
+
+        .search-meta-actions {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .kbd-hint {
+            display: none;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+
+        .kbd-key {
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            padding: 2px 6px;
+            border-radius: 5px;
+            border: 1px solid var(--border-hairline);
+            background-color: var(--surface-subtle);
+            color: var(--text-secondary);
+        }
+
+        .text-action-btn {
+            appearance: none;
+            border: 0;
+            background: transparent;
+            padding: 4px 8px;
+            border-radius: 6px;
+            color: var(--accent);
+            font-family: inherit;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color var(--duration-fast) var(--ease-editorial),
+                        color var(--duration-fast) var(--ease-editorial);
+        }
+
+        .text-action-btn:hover {
+            background-color: var(--accent-soft);
+        }
+
+        .is-hidden {
+            display: none !important;
+        }
+
+        /* Idle Guide Strip (Shown when query is empty) */
+        .idle-guide {
+            background-color: var(--surface-glass);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid var(--border-hairline);
+            border-radius: 16px;
+            padding: 24px;
+            animation: viewEnter var(--duration-base) var(--ease-editorial) both;
+        }
+
+        .idle-guide-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .guide-step {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .guide-step:first-child {
+            padding-top: 0;
+            border-top: 0;
+        }
+
+        .guide-step-num {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gold);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .guide-step-title {
+            margin: 0;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .guide-step-desc {
+            margin: 0;
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+            line-height: 1.55;
+        }
+
+        /* Results Grid */
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+        }
+
+        .student-card {
+            background-color: var(--surface-glass);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid var(--border-hairline);
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: var(--shadow-card);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: cardReveal var(--duration-base) var(--ease-editorial) forwards;
+            animation-delay: calc(var(--stagger, 0) * 28ms);
+            transition: transform var(--duration-fast) var(--ease-editorial),
+                        border-color var(--duration-fast) var(--ease-editorial),
+                        box-shadow var(--duration-fast) var(--ease-editorial),
+                        background-color var(--duration-base) var(--ease-editorial);
+        }
+
+        .student-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            gap: 12px;
+        }
+
+        .card-meta-line {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .student-name {
+            margin: 6px 0 0;
+            font-size: 1.125rem;
+            font-weight: 600;
+            line-height: 1.45;
+            color: var(--text-primary);
+        }
+
+        .credential-list {
+            display: flex;
+            flex-direction: column;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .credential-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding-block: 13px;
+        }
+
+        .credential-row + .credential-row {
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .credential-row:last-child {
+            padding-bottom: 2px;
+        }
+
+        .credential-info {
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .credential-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .credential-value {
+            font-family: var(--font-mono);
+            font-size: 1.0625rem;
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.03em;
+            color: var(--text-primary);
+            direction: ltr;
+            unicode-bidi: isolate;
+            text-align: start;
+            overflow-wrap: anywhere;
+        }
+
+        .credential-value--accent {
+            color: var(--accent-teal);
+        }
+
+        .copy-btn {
+            appearance: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            min-height: 40px;
+            padding: 8px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--border-hairline);
+            background-color: var(--surface-subtle);
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            flex-shrink: 0;
+            transition: background-color var(--duration-fast) var(--ease-editorial),
+                        border-color var(--duration-fast) var(--ease-editorial),
+                        color var(--duration-fast) var(--ease-editorial),
+                        transform var(--duration-fast) var(--ease-editorial);
+        }
+
+        .copy-btn:hover {
+            background-color: var(--accent-teal-soft);
+            border-color: var(--accent-teal-border);
+            color: var(--accent-teal);
+            transform: translateY(-1px);
+        }
+
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+
+        .copy-btn.is-copied {
+            background-color: var(--accent-teal-soft);
+            border-color: var(--accent-teal-border);
+            color: var(--accent-teal);
+        }
+
+        /* Empty State */
+        .empty-state {
+            background-color: var(--surface-glass);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid var(--border-hairline);
+            border-radius: 16px;
+            padding: 48px 24px;
+            text-align: center;
+            animation: viewEnter var(--duration-base) var(--ease-editorial) both;
+        }
+
+        .empty-icon-wrap {
+            width: 52px;
+            height: 52px;
+            margin: 0 auto 16px;
+            border-radius: 14px;
+            border: 1px solid var(--border-hairline);
+            background-color: var(--surface-subtle);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .empty-title {
+            margin: 0 0 8px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .empty-desc {
+            margin: 0 auto 20px;
+            max-width: 44ch;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .btn-secondary {
+            appearance: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 42px;
+            padding: 9px 18px;
+            border-radius: 10px;
+            border: 1px solid var(--border-hairline);
+            background-color: var(--surface-subtle);
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color var(--duration-fast) var(--ease-editorial),
+                        border-color var(--duration-fast) var(--ease-editorial),
+                        transform var(--duration-fast) var(--ease-editorial);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--surface-hover);
+            border-color: var(--border-hover);
+            transform: translateY(-1px);
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translate(-50%, -18px);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 100;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            max-width: calc(100vw - 32px);
+            padding: 11px 18px;
+            border-radius: 12px;
+            background-color: var(--surface-elevated);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid var(--gold-border);
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            font-weight: 600;
+            box-shadow: 0 18px 36px -12px rgba(0, 0, 0, 0.55);
+            transition: transform var(--duration-base) var(--ease-editorial),
+                        opacity var(--duration-base) var(--ease-editorial);
+        }
+
+        .toast.is-visible {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+
+        .toast-icon {
+            color: var(--accent-teal);
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        /* Editorial Footer */
+        .site-footer {
+            border-top: 1px solid var(--border-subtle);
+            padding-block: 24px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8125rem;
+        }
+
+        .footer-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: var(--gold);
+            font-weight: 500;
+            letter-spacing: 0.015em;
+        }
+
+        .footer-inner::before {
+            content: "";
+            width: 64px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0.55;
+        }
+
+        /* Animations */
+        @keyframes viewEnter {
+            from {
+                opacity: 1;
+                transform: translateY(6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes cardReveal {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Breakpoints */
+        @media (min-width: 640px) {
+            .container {
+                padding-inline: 28px;
+            }
+
+            .search-panel {
+                padding: 28px 32px;
+            }
+
+            .idle-guide {
+                padding: 28px 32px;
+            }
+
+            .kbd-hint {
+                display: inline-flex;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .topbar-context {
+                display: block;
+            }
+
+            .hero {
+                padding-block: 60px 44px;
+            }
+
+            .idle-guide-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 28px;
+            }
+
+            .guide-step {
+                padding-top: 0;
+                border-top: 0;
+                padding-inline-start: 24px;
+                border-inline-start: 1px solid var(--border-subtle);
+            }
+
+            .guide-step:first-child {
+                padding-inline-start: 0;
+                border-inline-start: 0;
+            }
+
+            .results-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .credential-row {
+                flex-wrap: wrap;
+            }
+
+            .copy-btn {
+                min-height: 44px;
+            }
+
+            .cta-primary {
+                width: 100%;
+                white-space: normal;
+                text-align: center;
+                padding: 12px 18px;
+            }
+        }
+
+        /* Accessibility: Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .student-card {
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient-canvas" aria-hidden="true"></div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast" role="status" aria-live="polite">
+        <span class="toast-icon" aria-hidden="true">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+            </svg>
+        </span>
+        <span id="toast-message">تم نسخ البيانات بنجاح!</span>
+    </div>
+
+    <!-- Minimalist Top Bar -->
+    <header class="topbar">
+        <div class="container topbar-inner">
+            <span class="brand-mark">Built different by Peter</span>
+
+            <span class="topbar-context">الصف الثاني الثانوي · QUREO</span>
+
+            <span class="topbar-emoji" aria-hidden="true">💻⚡</span>
+        </div>
+    </header>
+
+    <!-- Editorial Hero -->
+    <section class="hero">
+        <div class="container hero-inner">
+            <p class="hero-kicker">
+                <span>الصف الثاني الثانوي</span>
+                <span class="sep" aria-hidden="true">·</span>
+                <span>منصة البرمجة والذكاء الاصطناعي</span>
+            </p>
+            <h1 class="hero-title">مدرسة السيدة خديجة التجريبية لغات</h1>
+            <p class="hero-subtitle">استعلام حسابات الدخول لمنصة البرمجة والذكاء الاصطناعي للصف الثاني ثانوي.</p>
+
+            <div class="hero-actions">
+                <a href="https://me-portal.qureo.education" target="_blank" rel="noopener noreferrer" class="cta-primary">
+                    <span>الذهاب إلى منصة الامتحانات والبرمجة الرسمية</span>
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Search & Results Workspace -->
+    <main class="container">
+        <div class="container-narrow">
+            <!-- Search Console -->
+            <section class="search-panel" aria-labelledby="search-label">
+                <label for="search-input" class="search-label" id="search-label">ابحث باسم الطالب أو كود الطالب (اسم المستخدم):</label>
+
+                <div class="search-field-wrap">
+                    <span class="search-icon" aria-hidden="true">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </span>
+
+                    <input
+                        type="text"
+                        id="search-input"
+                        class="search-input"
+                        autocomplete="off"
+                        spellcheck="false"
+                        placeholder="اكتب اسم الطالب أو الكود هنا (مثال: بيتر، 464232212)..."
+                    >
+
+                    <button type="button" id="inline-clear-btn" class="inline-clear-btn" aria-label="مسح البحث" title="مسح البحث">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="search-meta-bar">
+                    <span id="results-count" class="results-count">ابدأ بكتابة اسم الطالب أو الكود للبحث.</span>
+
+                    <div class="search-meta-actions">
+                        <span class="kbd-hint">
+                            <span class="kbd-key">/</span>
+                            <span>للبحث السريع</span>
+                        </span>
+                        <button type="button" id="clear-btn" class="text-action-btn is-hidden">إعادة ضبط البحث</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Calm Initial State Guide -->
+            <section id="initial-state" class="idle-guide" aria-label="دليل الاستخدام">
+                <div class="idle-guide-grid">
+                    <div class="guide-step">
+                        <span class="guide-step-num">01.</span>
+                        <h2 class="guide-step-title">ابحث بالاسم أو الكود</h2>
+                        <p class="guide-step-desc">أدخل اسم الطالب ثلاثياً أو جزءاً منه، أو اكتب كود الطالب المكون من 9 أرقام.</p>
+                    </div>
+                    <div class="guide-step">
+                        <span class="guide-step-num">02.</span>
+                        <h2 class="guide-step-title">انسخ بيانات الحساب</h2>
+                        <p class="guide-step-desc">استخدم أزرار النسخ السريع لنقل كود الطالب وكلمة المرور بدقة تامة.</p>
+                    </div>
+                    <div class="guide-step">
+                        <span class="guide-step-num">03.</span>
+                        <h2 class="guide-step-title">سجّل الدخول على QUREO</h2>
+                        <p class="guide-step-desc">انتقل إلى البوابة الرسمية وأدخل اسم المستخدم وكلمة المرور للبدء.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Grid -->
+            <div id="results-grid" class="results-grid is-hidden" aria-live="polite">
+                <!-- Dynamic Cards Will Be Injected Here -->
+            </div>
+
+            <!-- Empty State -->
+            <section id="empty-state" class="empty-state is-hidden" aria-live="polite">
+                <div class="empty-icon-wrap" aria-hidden="true">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+                <h2 class="empty-title">عذراً، لم يتم العثور على طالب بهذا الاسم أو الكود</h2>
+                <p class="empty-desc">تأكد من صحة الحروف أو الكود المدخل وحاول مرة أخرى.</p>
+                <button type="button" id="empty-reset-btn" class="btn-secondary">إعادة ضبط البحث</button>
+            </section>
+        </div>
+    </main>
+
+    <!-- Minimal Footer -->
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <span>Crafted with ❤️ by Eng. Peter | All Rights Reserved ©</span>
+        </div>
+    </footer>
+
+    <!-- JavaScript Data & Logic -->
+    <script>
+        // Complete database of 289 students extracted from official school records
+        const studentsData = [
+            { id: "464232212", name: "لوجين على ابراهيم محمد عبد المجيد", pass: "82Tbvg_!" },
+            { id: "463902772", name: "سهيله عمرو ابراهيم مصطفى سلطان", pass: "5K_Ep5uU" },
+            { id: "464232418", name: "لميس محمود احمد عبد الواحد محمد", pass: "Ga2kC3_B" },
+            { id: "463703477", name: "سما تامر محمود محمد محمود", pass: "nP63?MxB" },
+            { id: "474134573", name: "معاذ محمود فؤاد عبد الهادي ابو العلا", pass: "d99EPw8?" },
+            { id: "464231592", name: "يوسف مينا سعد توفيق سعد", pass: "4U_46g2g" },
+            { id: "467400327", name: "عبد العاطى ياسر عبد العاطى احمد سعد", pass: "VTf e 8G" },
+            { id: "465692234", name: "منة الله سيد محمد احمد بركات", pass: "Q9H2t2_u" },
+            { id: "463797859", name: "بسمله يحيى زكريا محمد", pass: "v93CGxP" },
+            { id: "464708825", name: "حازم مجدى عباس السيد صالح", pass: "kRw6F2V" },
+            { id: "466968874", name: "مارك ملاك رمسيس شفيق توفيلس", pass: "_zb28UzS" },
+            { id: "463702878", name: "مازن سامی احمد امین احمد", pass: "xD6?8xT3" },
+            { id: "464708121", name: "ندی محمد احمد سالم احمد", pass: "XWs?8J3n" },
+            { id: "465192410", name: "ريتاج وائل رمضان عيد الجزار", pass: "yneRyE!7" },
+            { id: "464231972", name: "ولاء عمرو محمد عبده محمد حبيب", pass: "ay!Bg2!t" },
+            { id: "463902112", name: "روان احمد مصطفی کمال فرج عبدالله ناص", pass: "6TVcP!!S" },
+            { id: "465161692", name: "عبد العزيز يحيى صابور مرسال سعيد", pass: "7P?pfby8" },
+            { id: "466975856", name: "زینه محمد مصطفي احمد عثمان", pass: "bwwRta_7" },
+            { id: "464564024", name: "فيلوباتير راجي ميشيل عبد الملك عبد المسيح", pass: "?9HRephk" },
+            { id: "469993972", name: "مريم احمد عبد اللطيف عبد الباري ابراهيم", pass: "xky!FY4u" },
+            { id: "463821471", name: "يوسف على عبدالله مراد على", pass: "Jg?p5qTT" },
+            { id: "464242738", name: "شهد اسلام عبد الحميد امين عبد الحميد", pass: "D5J4?naV" },
+            { id: "463703303", name: "جومانا سيمون مجدى عطاالله تادرس", pass: "HTKfwa9_" },
+            { id: "473957330", name: "رهف وليد عبد الوهاب عبد العزيز عبد الوهاب", pass: "C?q4RBAZ" },
+            { id: "463821623", name: "يوسف يحى محمد عبد الرحمن على", pass: "m4KjG_bC" },
+            { id: "469990374", name: "ايسل رضا على السيد", pass: "QbS3!Pa_" },
+            { id: "464230561", name: "عز الدين سامح مصطفی عفیفی احمد", pass: "G?Vec6Fw" },
+            { id: "465952232", name: "داليا مؤمن محمد محمد الشرقاوى", pass: "2U_CYy!A" },
+            { id: "470419222", name: "جنى محمد محمد السعيد احمد احمد الحنفي", pass: "CGP8Q!MS" },
+            { id: "466870215", name: "هنا رامى فيصل عبد الحميد ابراهيم", pass: "n94BJu?5" },
+            { id: "464259094", name: "كيرلس فريد فاروق عطيه عيد", pass: "rKGz?4eW" },
+            { id: "464270652", name: "رؤى هلال احمد هلال احمد", pass: "3_wPSfe8" },
+            { id: "465692214", name: "فادي جرجس طلعت ملاك بطرس", pass: "x6s?FHra" },
+            { id: "466971493", name: "سلمى حسن صبحی حسن خميس", pass: "4a?Umg8a" },
+            { id: "465161569", name: "مريم محمد صلاح العزب عزام", pass: "7afF?vME" },
+            { id: "463701093", name: "جنى محمد عشری محمد عبد التواب", pass: "V_6nk8YT" },
+            { id: "463797765", name: "بسمه هشام حنفی محمود حسن", pass: "Eg!J4nns" },
+            { id: "464231709", name: "رومانی هانی سمير لبيب عطيه", pass: "ZMJKY_2t" },
+            { id: "463821544", name: "على عاصم عبدالهادي الطنطاوى عبد المادي", pass: "_zfTJrp9" },
+            { id: "463179030", name: "ليالي على حسین محمد حسن", pass: "!4HT2Fpx" },
+            { id: "463821580", name: "حنين ياسر عبد العاطى سليمان عطا الله", pass: "w6DAsT?C" },
+            { id: "463797982", name: "ملك عاطف اسماعيل احمد", pass: "pTJ6r4?T" },
+            { id: "464262767", name: "يوسف محمد طلعت محمد على", pass: "7S_S7pVm" },
+            { id: "486776648", name: "عصماء احمد شعبان محمد احمد", pass: "pvufC4M!" },
+            { id: "463669892", name: "مينام سامی کمال طوني جنس", pass: "JZx8b_AW" },
+            { id: "470246178", name: "بسمله محمد احمد محمد حسن", pass: "Q7?Aj7D2" },
+            { id: "463700384", name: "علی احمد عيسى ابراهيم", pass: "_v9hJm6C" },
+            { id: "473990822", name: "مروان شعبان شاکر ابراهيم عبد المجيد", pass: "SatQ?g4!" },
+            { id: "463106233", name: "ريناد عبدالله على محمد بدران", pass: "PRXSf_5T" },
+            { id: "464228390", name: "مهند طارق سيد عبد الحميد زيدان", pass: "Xs?TV6pq" },
+            { id: "473990751", name: "زياد طه يحي محمد جبلی", pass: "v3V4K3!?" },
+            { id: "463668697", name: "جنا محمد عبد القادر حسین ايوب", pass: "Z?3ANttg" },
+            { id: "463821369", name: "فارس تامر سعيد محمد رمضان", pass: "D2mV?2Eb" },
+            { id: "479854578", name: "نهير جميل محمود محمود احمد", pass: "7auWz?Fm" },
+            { id: "464228601", name: "لوجين احمد موفق انور المصرى", pass: "yuY_zGt8" },
+            { id: "464265381", name: "مريم محمد عبد العليم عبد الحكم ابو النص", pass: "Pr?K5tQm" },
+            { id: "465192452", name: "على محمد حمدى مصطفى ابراهيم", pass: "aJ_cfJv9" },
+            { id: "464271926", name: "مريم صفى الدين السيد محمود نصار", pass: "?J6PM9ts" },
+            { id: "464261103", name: "ادهم محمود احمد محمود علی", pass: "s?8ghB7s" },
+            { id: "464260757", name: "عمر وليد طه محمود محمد", pass: "C3znZ7?q" },
+            { id: "467400033", name: "عبد الرحمن طه عبده محمد حامد", pass: "v!8SkW8S" },
+            { id: "463798047", name: "مريم طارق محمود عبد السلام احمد", pass: "_E8ku48D" },
+            { id: "464270742", name: "ملك امام محمد امام محمد", pass: "P8X?ESrU" },
+            { id: "463821104", name: "مريم حسام الدین موسى محمد حلمي", pass: "H4gs_8My" },
+            { id: "464241646", name: "مريهان تامر محمد عبد الغنى قنديل", pass: "VR_VkHz6" },
+            { id: "464699900", name: "تسنيم محمد عبد الحليم مدبولی دسوقی", pass: "_3?eeS2Q" },
+            { id: "465692184", name: "فارس عبد السلام عبد العزيز عمری سليمان", pass: "b??Gx6Yb" },
+            { id: "463700506", name: "عبد الخالق على عبد الخالق على حسن", pass: "z7ZW!am_" },
+            { id: "464270072", name: "مارفی سامح بخيت بسطروس داود", pass: "6zjFSdN_" },
+            { id: "498385682", name: "ساره اشرف امام محمد حسن", pass: "S6JN?dfA" },
+            { id: "463702992", name: "مريم محمد السيد ابراهيم عماره", pass: "_33EP_Xt" },
+            { id: "464945280", name: "تقوى علاء محمد رشاد محمد السبكي", pass: "5z2n!D8P" },
+            { id: "471904856", name: "معاذ احمد محمد عبد اللطيف ابراهيم", pass: "!g5XDXcZ" },
+            { id: "463703525", name: "سما هانى محمود الشحات الصفتي", pass: "9!cN6?X4" },
+            { id: "465951034", name: "احمد ايهاب محمد عبد الراضي السمان", pass: "zN_6MJ!k" },
+            { id: "469078131", name: "مصطفى محمد عبد الفتاح عبد العظيم حامد", pass: "7!RFaNBt" },
+            { id: "463669811", name: "عادل احمد عادل عبدالله ابوالعينين", pass: "4mXZAj_5" },
+            { id: "468356050", name: "جودی باسم حسين يوسف احمد", pass: "B4X3Qm!a" },
+            { id: "464242214", name: "نور احمد امین علی احمد", pass: "_8D_aCJ!" },
+            { id: "474134593", name: "مازن عبد الرحمن محمد احمد", pass: "5ke!6V2p" },
+            { id: "464269681", name: "شيماء حسن ابوهلال حسن محمد", pass: "z32!fgE9" },
+            { id: "464269528", name: "جنى عمرو صلاح محمود حافظ", pass: "fVNN_X9U" },
+            { id: "464490029", name: "ماجد محمد السيد عبد المنعم خليف", pass: "k_z3?NA6" },
+            { id: "474324735", name: "فادی منصور سامی جرجس سعد", pass: "w4W!5x!Z" },
+            { id: "470419208", name: "داليا محمد محمد السعيد احمد احمد الحنفي", pass: "6gFAk_u9" },
+            { id: "463702740", name: "مريم اشرف التونسي على", pass: "FhzT5_4" },
+            { id: "464263531", name: "عادل سامح محمد محمد غریب", pass: "h4r!PxHa" },
+            { id: "464264975", name: "معاذ محمد احمد امیابی احمد", pass: "!N43v?z5" },
+            { id: "464707925", name: "جنى تامر فتحى سيد يوسف", pass: "_8CzpWeV" },
+            { id: "464242843", name: "نور محمود عبده محمد سالم", pass: "X?_Q9hyH" },
+            { id: "486475221", name: "حنين محمد محمود حامد ابراهيم", pass: "rZt9_CwY" },
+            { id: "473916776", name: "رنا محمد ابوبکر ابراهيم", pass: "!X3T4uKg" },
+            { id: "466986786", name: "يوسف وليد فتحی جوده مجاهد", pass: "8!kd9d2F" },
+            { id: "463670342", name: "عبد الرحمن صابر ابراهيم معوض رمضان", pass: "_EzaTrr7" },
+            { id: "466164786", name: "ضحى محمد محمد سيد عامر", pass: "2!zCTWTM" },
+            { id: "464271053", name: "امنيه عبد الحميد حسين عبد الحميد على", pass: "N2gpjD!d" },
+            { id: "466970733", name: "ارسانی امیل رمسيس شفيق توفيلس", pass: "tKa93!wC" },
+            { id: "464241796", name: "رؤى فتحى محمود عبد الرحيم", pass: "4!RmjPxV" },
+            { id: "463702835", name: "يوسف عمرو احمد عمر عبد العليم", pass: "VE5N!?tG" },
+            { id: "473990662", name: "أروى عيد ابراهيم سيد محمد مسعود", pass: "Mg3k2?Vd" },
+            { id: "467404633", name: "رحمه محمد اسماعيل صبيح على", pass: "cnJ?3Sp_" },
+            { id: "463902563", name: "عبد الرحمن ابراهیم جابر هریدی", pass: "x!Hq5GCA" },
+            { id: "463901884", name: "سلمى محمود عبد الحميد احمد ابراهيم", pass: "?7GxtJsP" },
+            { id: "464849791", name: "احمد عادل حامد احمد جلال", pass: "mR_PCuA5" },
+            { id: "464709529", name: "محمد احمد امین فرج محمود", pass: "?XSSTKE9" },
+            { id: "464262090", name: "بافلی هنی فرج توفيق بطرس", pass: "3zp?TT2b" },
+            { id: "464269969", name: "ملك مقار دانیال نصحى بادير", pass: "Xk9Xsb!2" },
+            { id: "464231010", name: "عمار مصطفى عبد الوهاب محمد على", pass: "fpY2?3th" },
+            { id: "465692198", name: "معاذ حسن خليل عبد الغني خليل", pass: "zMCUxA2_" },
+            { id: "463797642", name: "ادهم مجدی محمد ابراهيم محمد", pass: "v6v?HZXW" },
+            { id: "464258450", name: "فادي يوسف فوزى عبد المجلی جرجس", pass: "4k!x98?U" },
+            { id: "463821505", name: "جنی محمد على حافظ على", pass: "6fr!_TVq" },
+            { id: "463670422", name: "فارس ماجد عباس زكريا عباس", pass: "k5?ZvEn" },
+            { id: "464269778", name: "سلمی محسن حسین مصطفى حسين", pass: "w?z8sFEb" },
+            { id: "464241725", name: "ريتاج محمد سعيد عبد المنعم سيد", pass: "w?8P!xSA" },
+            { id: "463902050", name: "بافلی نبیل عدلی رزيق عبد المسيح", pass: "G_crVQ5!" },
+            { id: "473028502", name: "رقيه محمد محمد عبد المعبود محمد ابون", pass: "?RbvtNt8" },
+            { id: "477949941", name: "مصطفى وائل محمد مرعى محمد", pass: "?3fNrWSk" },
+            { id: "479854636", name: "ساندی تامر ناجح نعام هلول", pass: "?45Jv3Va" },
+            { id: "464229626", name: "احمد عصام عويس محمد احمد", pass: "mKBr?72u" },
+            { id: "463797605", name: "اياد كريم مصطفى عبدالله امین", pass: "Msmw!7JT" },
+            { id: "465951048", name: "فاطمه جمال عبد الرؤوف العسيلي محمد", pass: "!TX3dTst" },
+            { id: "463700158", name: "ضحى علاء توفيق محمد عماره", pass: "3gVXH4!8" },
+            { id: "467401314", name: "احمد السيد عبد الستار عبد الجليل السيد", pass: "9Cq!rxQ4" },
+            { id: "464272689", name: "ميرنا وليد محمود عبد الرحيم احمد", pass: "?PbFea2H" },
+            { id: "463106926", name: "نورالدين بهاء عبد الحميد على احمد", pass: "!bT4Ba5h" },
+            { id: "464260869", name: "أدهم محمد عبدالحی محمد غنیمی", pass: "3Fu_X2SH" },
+            { id: "466238702", name: "فاطمه محمد طلعت پس احمد", pass: "B4Mn_4Mz" },
+            { id: "464265087", name: "احمد امير سعيد محمد محمد", pass: "sSAydS2?" },
+            { id: "464269087", name: "رحمه كمال محمود احمد احمد", pass: "vG6_SfFz" },
+            { id: "487380446", name: "سلمى علاء فرج على السيد", pass: "2c?pvKBH" },
+            { id: "465161657", name: "صلاح هشام صلاح عبد الحق احمد", pass: "2dPm_x!s" },
+            { id: "474324749", name: "مهند احمد عبد الحليم عبد المقصود حسن", pass: "8mhar?Wm" },
+            { id: "464232345", name: "آلاء محمد حسن محمد السيد", pass: "p!s6!nmS" },
+            { id: "464272419", name: "شهد ياسر السيد رواش جابر", pass: "sp_X9fMd" },
+            { id: "465226651", name: "رنا محمد فوزی توفیق", pass: "rM!S!4s!" },
+            { id: "463703496", name: "ريتال باسم على على حجاب", pass: "kd67PyP_" },
+            { id: "463797953", name: "ناديه اشرف عادل غبريال مهنی", pass: "6WQvS?Q!" },
+            { id: "464230426", name: "عبدالله محمد حسن محمد السيد", pass: "YWZp4ap!" },
+            { id: "463703342", name: "سيف الدين احمد ابراهيم محمد امام", pass: "anh?4AmX" },
+            { id: "463664632", name: "رفيف على رجب محمد الصعيدي", pass: "TV7sk?bV" },
+            { id: "463700572", name: "نور احمد محمد عبده احمد", pass: "Zm7!vbku" },
+            { id: "473093382", name: "صلاح ياسر صلاح عبد الغفار عفيفي", pass: "NCzt8_q7" },
+            { id: "464261667", name: "احمد ماهر احمد حسین مخيمر", pass: "!XR3aKdw" },
+            { id: "464265444", name: "مازن ناصر السعيد السيد العزب", pass: "?E9X6p_X" },
+            { id: "463797835", name: "هنا اسامه على على مصطفى", pass: "gyD!zDr3" },
+            { id: "463669977", name: "حمدى صبحي حنفى محمود حسن", pass: "_UYz8nUb" },
+            { id: "465252754", name: "بسنت احمد محمد احمد عبد الكريم", pass: "5!4g9RG_" },
+            { id: "464265567", name: "عمرو عادل محمد عبد الشكور زيد", pass: "5J9_w7z!" },
+            { id: "464262979", name: "محمد عصام جابر محمد ابراهيم", pass: "rQ_rX3ZF" },
+            { id: "463902617", name: "ملك محمد فتحى محمد السيد", pass: "dRtK_9n!" },
+            { id: "473214084", name: "ياسمين سعد حسين مخيمر عبد اللطيف", pass: "qxD_U82F" },
+            { id: "463700052", name: "محمد سید دسوقی سید دسوقی", pass: "?aW?sx8j" },
+            { id: "466975904", name: "ادهم هشام عبد العزيز عبد المطلب ابراهيم", pass: "_fC4huM9" },
+            { id: "473990845", name: "مالك أنس فريد محمد عبدالرحمن", pass: "x?Tves8z" },
+            { id: "463700448", name: "هاجر محمود محمد محمود محمد", pass: "NjD_4R!f" },
+            { id: "463700923", name: "فرحه محمد ابو المجد محمد اسماعيل", pass: "?JQ5b9n?" },
+            { id: "464765548", name: "حازم محمد عبد القادر على اسكيف", pass: "?py3fTZd" },
+            { id: "464228774", name: "یوسف محمد مجدی محمد رواش", pass: "r3Ck7Pz_" },
+            { id: "464231892", name: "ساندی هانی مکين يوسف جندى", pass: "j5QU?W3c" },
+            { id: "469990480", name: "ياسين مصطفى على طالب محمد", pass: "ax_k3_YA" },
+            { id: "464261338", name: "مروان طلعت سعيد عبد المنعم", pass: "4n2YB!er" },
+            { id: "473990803", name: "ادهم فرج عزت فرج الدهشان", pass: "NhY_J3FK" },
+            { id: "463132188", name: "مريم خلف الله عبد العال خلف الله", pass: "X!rZC2!h" },
+            { id: "464258774", name: "زينه عباس عثمان محمد حسین", pass: "dpS6XZ_N" },
+            { id: "464263941", name: "احمد اشرف احمد عليوه منصور", pass: "xv2T_9hZ" },
+            { id: "465444519", name: "ياسمين هشام عبدالكريم عبدالله السقيلي", pass: "Nc!tj?5E" },
+            { id: "482396346", name: "زياد محمد عبد الغنى حسن حسنين", pass: "Up6T!6q4" },
+            { id: "486261143", name: "جنى محمد السيد على محمد", pass: "CREat9e?" },
+            { id: "469994035", name: "رودينا محمود محمد ابراهيم على الشحرى", pass: "H_Hg5!jM" },
+            { id: "464264880", name: "حسين احمد حسین احمد حسن", pass: "5eE6Aw" },
+            { id: "465952234", name: "عبدالله عصام سيد ابوضيف عبد الرحمن", pass: "!kaJ3EZ7" },
+            { id: "466548630", name: "سلمى سوراج عبد العال امين عبد العال", pass: "3_vNgnb3" },
+            { id: "465192394", name: "زينب عماد عثمان احمد عميره", pass: "8?feFuZ8" },
+            { id: "466548621", name: "ملك ممدوح رمضان محمد حماد", pass: "6wpD?BZB" },
+            { id: "464272237", name: "جسيكا نشأت ناشد مرزوق منصور", pass: "!xZ5t8p9" },
+            { id: "463702625", name: "حسن محمد حسین ابراهيم محمد لاشين", pass: "!8wpJDAc" },
+            { id: "487171654", name: "رؤى عماد الدين عبد الكريم عبد القادر عفیفی", pass: "JY7?buHm" },
+            { id: "465951021", name: "ابرام رومانی انور خلیل نخیل", pass: "2GjvhJR_" },
+            { id: "463669046", name: "کنزی محمد شحاته صلاح الدین محمد شحاته", pass: "yyY29_Tv" },
+            { id: "463703459", name: "ملك ماهر فليبس فليبس شنوده", pass: "P_BG7h8X" },
+            { id: "464273820", name: "ياسين محمد عبد العليم عبد الحكم ابو النصر", pass: "!tW58VsF" },
+            { id: "464265797", name: "جنى شريف عبد المهيمن محمد لطفى", pass: "t_Qe5kEJ" },
+            { id: "465952230", name: "ابرینی رومانی صبحى حزقيال شحاته", pass: "Bf_6H?KC" },
+            { id: "466970768", name: "حازم صبري محمد عبد المجيد خليل", pass: "gB4r_?s2" },
+            { id: "465952227", name: "کیرلس دمیان اسحق دمیان جاد", pass: "B!2pb?F6" },
+            { id: "469996481", name: "فاروق محسن فاروق على الابيض", pass: "bZY?3aPk" },
+            { id: "464265931", name: "حبيبه احمد محمد وهب الله محمد", pass: "P4c?GvEG" },
+            { id: "466986947", name: "عبد الرحمن اسامه محمد محمد حسن", pass: "y8v?hUuY" },
+            { id: "464272339", name: "ملك عصام محمد امين النوبي", pass: "eVh?TDs6" },
+            { id: "464241566", name: "جودی محمد شوقی سید محمود", pass: "Cy22?xE9" },
+            { id: "485921638", name: "محمد فرید ابراهيم محمود جبر", pass: "Jc?AmUw3" },
+            { id: "473996739", name: "جنی سید عبد السلام سید محمد المهدى", pass: "UcjvY9w!" },
+            { id: "464260342", name: "مروان عادل عبد الرحيم مصطفى جاب الله", pass: "h6F!gBY9" },
+            { id: "465952226", name: "محمد فؤاد عبد العليم فؤاد مصطفى", pass: "!qf3YtVm" },
+            { id: "464264613", name: "محمد اشرف محمد على عبد الغفار", pass: "4_!snVcV" },
+            { id: "463902458", name: "محمد مجدی محمد فرج حسنين", pass: "4vVSJT!T" },
+            { id: "464243099", name: "يوسف حسين يوسف محمد سلطان", pass: "Ps5ddy_W" },
+            { id: "482241160", name: "محمد احمد محمد عبد الحميد السيد", pass: "kW_zQpE7" },
+            { id: "463902968", name: "بسمله محمد الشافعي عبد العال الشافعي", pass: "s73XZRT?" },
+            { id: "464708215", name: "حسن احمد حسن محمود ابراهيم", pass: "?S5wnh6R" },
+            { id: "465952242", name: "عبد الرؤوف جمال عبد الرؤوف العسيلي محمد", pass: "!nA6S3Yh" },
+            { id: "467734733", name: "عمر ثروت فاروق احمد حسن", pass: "2?Npe4Nh" },
+            { id: "482498893", name: "رحيل عاصم محمد ابراهيم ابوالنصر", pass: "CxeT_2M4" },
+            { id: "464242662", name: "لوجين محمد حنفی محمود عبدالله", pass: "?3f?UJqs" },
+            { id: "465692247", name: "مريم مجدى كمال ملك بقطر", pass: "3Vg?BC4W" },
+            { id: "464232060", name: "فاطمه ايهاب احمد ابراهيم على", pass: "!6SphANT" },
+            { id: "463703401", name: "جميله عبد المنعم عبد الحميد حسن فراج", pass: "7?6xDvg4" },
+            { id: "469990685", name: "شهد عصام مختار معوض سالم", pass: "Z7syF!Tg" },
+            { id: "465192456", name: "محمد هشام محمد سعيد محمد ابو خضره", pass: "_pRHr69r" },
+            { id: "464264125", name: "ياسين محمد ياسين محمد السيد", pass: "9ds?gSzK" },
+            { id: "466963083", name: "سما محمد حسن احمد على", pass: "h?Vm!Ya4" },
+            { id: "463699986", name: "جنه عبد العظيم مسعد عبد العظيم محمد", pass: "av8RA!mA" },
+            { id: "474137766", name: "ساندی فوزی ابراهيم رياض ابراهيم", pass: "5RK?t!mA" },
+            { id: "464270567", name: "رویده جمال الدین صالح محمد توفيق", pass: "krN?6hKy" },
+            { id: "473933782", name: "احمد عطيه فرج امين عطيه", pass: "AU2_uBhW" },
+            { id: "464231161", name: "سيف نورالدين جمال حامد محمود", pass: "pk3_8GC4" },
+            { id: "464709641", name: "عبد العزيز وليد عبد العزيز عبد الفتاح صبيح", pass: "KYc_egX4" },
+            { id: "470419210", name: "سندس محمد محمد السعيد احمد احمد الحنفي", pass: "b4!2t!B5" },
+            { id: "475882300", name: "خدیجه حازم السيد عبد الحميد عبد الفتاح", pass: "bEM?4cBK" },
+            { id: "464259229", name: "صلاح عمرو صلاح سید محمد", pass: "u_W2jqg3" },
+            { id: "463821248", name: "يوسف فريد حبيب عطا الله بشاره", pass: "YvxnF!4n" },
+            { id: "464242790", name: "حنين محمد كامل مغربي عبد الجواد", pass: "Nv9kWh?g" },
+            { id: "473064937", name: "يوسف عماد يوسف ميخائيل نخله", pass: "VCu!x89y" },
+            { id: "477122438", name: "محمد فيصل محمد محمود المغربي", pass: "gnvDA3!?" },
+            { id: "465692230", name: "تقى محمد نبيل عثمان محمد", pass: "_92pHzAv" },
+            { id: "463665869", name: "احمد عبدالله حامد عبدالله ابوشنیشن", pass: "VsK5_5dM" },
+            { id: "467403303", name: "منه نضال فايق متبولي متبولي", pass: "x4fZpZ_P" },
+            { id: "463821219", name: "مريم محمد محمود عوض ابوزید", pass: "8STMky?R" },
+            { id: "464273901", name: "يوسف محمد عبد العليم عبد الحكم ابو النصر", pass: "FPB?zR5j" },
+            { id: "468214559", name: "جنی رمضان محمد محمود جوده", pass: "xxgsS?77" },
+            { id: "473865630", name: "محمد احمد عبد الفتاح عبد الرحمن على", pass: "m6bBX5N!" },
+            { id: "465692245", name: "عبد الرحمن تامر عطيه محمد عثمان", pass: "qMf9w_VB" },
+            { id: "463797784", name: "حمدی حسن سید حسن محمد", pass: "Ke!bm4DF" },
+            { id: "463700618", name: "مصطفى محمد محمد عبد القوى سالم", pass: "rBsP_7UG" },
+            { id: "465192435", name: "هيه احمد عبد الرحيم احمد محمد", pass: "CvE!C7rd" },
+            { id: "464242518", name: "روجان حمدی صلاح عمر ابراهيم", pass: "2rE_9BuG" },
+            { id: "464232275", name: "آیه محمد حسن محمد السيد", pass: "ky?Z5HHy" },
+            { id: "469990778", name: "ملك امام محمد على عبد العزيز", pass: "k38qrA_n" },
+            { id: "477336317", name: "عمر مختار احمد محمد الحسيني", pass: "q7A_ZpjT" },
+            { id: "463670538", name: "ادهم محمد عبد الرحمن غريب احمد", pass: "622eG!tN" },
+            { id: "464260982", name: "اسلام حسین صفوت حسين سليمان", pass: "9RYayHB!" },
+            { id: "477587570", name: "مريم حسن محمد رشاد احمد", pass: "?Tqt7vV!" },
+            { id: "474283075", name: "احمد اسامه احمد عبد الفتاح مصطفى", pass: "A8U9hSY" },
+            { id: "463703082", name: "سيد وجيه السيد بيومى عبد الرحيم", pass: "X_Auc5!2" },
+            { id: "464441301", name: "حسين ابراهيم حسين رحمه ابراهيم", pass: "gn_aNYM3" },
+            { id: "466968907", name: "استيفن اميل رمسيس شفيق توفيلس", pass: "?Eu99yNx" },
+            { id: "464271148", name: "جودی احمد عبداللاه السيد محمد", pass: "TWz?EsD3" },
+            { id: "464228877", name: "محمد علی محمد عبده على", pass: "6nE?G_Db" },
+            { id: "466164249", name: "جنى بهاء الدين بركات محمد عبد الرحمن", pass: "cRv3S?Ca" },
+            { id: "470465306", name: "رجائي على رجائي على ابوزيد", pass: "v7tr!yQr" },
+            { id: "464262526", name: "عمر ایمن امين على محمد", pass: "P?7Rf5BU" },
+            { id: "463700230", name: "فاطمه خالد احمد السيد محمد", pass: "hzU!qj6D" },
+            { id: "464261768", name: "ایاد محمود رضا مصطفى متولى", pass: "cE4nEk!h" },
+            { id: "463902347", name: "شمس ابراهيم جابر هریدی", pass: "?kDTs6EC" },
+            { id: "473998941", name: "عبد الرحمن حمدی محمد احمد حسن", pass: "5X!P_Y6h" },
+            { id: "466976022", name: "بولا مدحت ميشيل فؤاد غبريال", pass: "We3WW!GQ" },
+            { id: "463703119", name: "حبيبه عبد السلام کمال الدین محمد", pass: "kS2XPp?s" },
+            { id: "464263757", name: "خالد احمد حسن مدنی شعبان", pass: "_qm3W8RH" },
+            { id: "464272138", name: "سلمی محمد احمد اسماعیل محمود", pass: "_b5hKMnc" },
+            { id: "465692220", name: "روضه احمد محمد محمد عبد المجيد", pass: "kH6R!xUb" },
+            { id: "463902400", name: "ساره اسامه محمود عبد الهادي", pass: "86DAkjD!" },
+            { id: "466548598", name: "مريم ممدوح رمضان محمد حماد", pass: "QW!9XCSq" },
+            { id: "473780133", name: "نادین تامر محمد عبدالله امین", pass: "4zquSx?C" },
+            { id: "463902297", name: "مارك فريد شفيق فريد جرجس", pass: "5skm!hBR" },
+            { id: "473916857", name: "مريم ابو القمصان محمد ابو القمصان محمد", pass: "Dq3tN!HD" },
+            { id: "464261536", name: "على حسين محمد حسين على", pass: "6??t2NJs" },
+            { id: "464270164", name: "جودی احمد طه عبد العال احمد", pass: "F_D8gyAN" },
+            { id: "463669528", name: "شهد صبحی حنفى محمود حسن", pass: "_JmKwhd7" },
+            { id: "463666924", name: "جومانه ابراهیم محمد ابراهیم سید", pass: "F43jmr_T" },
+            { id: "464261438", name: "محمد احمد على احمد على", pass: "B!N5fZeC" },
+            { id: "463341916", name: "منه أحمد عبد القادر على الرفاعي", pass: "VW9Es!pq" },
+            { id: "463702692", name: "هبه الله محمد سعيد عبد الحميد علوان", pass: "_C7UD!gv" },
+            { id: "465934756", name: "روان محمد عطيه حسن احمد", pass: "8wwwMx?Y" },
+            { id: "473990641", name: "عبد الرحمن احمد لطفی احمد محمد", pass: "C7_pFdFd" },
+            { id: "463798197", name: "سما عبد الحميد فتحى ابراهيم على", pass: "n95H!d4F" },
+            { id: "464269435", name: "رودينا مصطفى دسوقى سنوسی محمد", pass: "RuU5s!sV" },
+            { id: "463797569", name: "ملك نصر عبد العظیم محمود مسلم", pass: "_96gbDYu" },
+            { id: "468663412", name: "ياسين ايمن رمضان محمد مصطفی", pass: "Z!8Jr!Gh" },
+            { id: "464229173", name: "ياسين تامر حسن المصرى حسن المصرى", pass: "?M8d33Wz" },
+            { id: "464230887", name: "على وليد كامل مغربي عبد الجواد", pass: "u!88gGCD" },
+            { id: "464269303", name: "جومانه وائل فارس عريان حبيب", pass: "!xVS9S6z" },
+            { id: "463703423", name: "يوسف ايمن محمد خليل خليل", pass: "R!xAs8bU" },
+            { id: "469994017", name: "رجاء محمود جابر محمد محمود", pass: "2zE2fdly" },
+            { id: "465723323", name: "على محمد سعد على السيد خليفه", pass: "ZTjF62??" },
+            { id: "469994027", name: "احمد تامر فکری محمود عرفان", pass: "JVrUu!_5" },
+            { id: "463664689", name: "بيتر یونان فيلبس يسی مرجان", pass: "4APuzH9_" },
+            { id: "469893520", name: "محمد صفاء الدين عبد العزيز عبد المقصود", pass: "svzgN3!G" },
+            { id: "465692238", name: "حنين فؤاد حسين ابراهيم لاشين", pass: "Z7JeRTd!" }
+        ];
+
+        let toastTimer = null;
+        let searchTimeout = null;
+
+        const searchInput = document.getElementById('search-input');
+        const resultsGrid = document.getElementById('results-grid');
+        const resultsCount = document.getElementById('results-count');
+        const initialState = document.getElementById('initial-state');
+        const emptyState = document.getElementById('empty-state');
+        const clearBtn = document.getElementById('clear-btn');
+        const inlineClearBtn = document.getElementById('inline-clear-btn');
+        const emptyResetBtn = document.getElementById('empty-reset-btn');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toast-message');
+
+        function normalizeArabic(text) {
+            return text
+                .replace(/[أإآ]/g, 'ا')
+                .replace(/ى/g, 'ي')
+                .replace(/ة/g, 'ه');
+        }
+
+        function showToast(message) {
+            toastMessage.textContent = message;
+            toast.classList.add('is-visible');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                toast.classList.remove('is-visible');
+            }, 2600);
+        }
+
+        function copyToClipboard(text, successMessage, buttonEl, copiedLabel) {
+            const onSuccess = () => {
+                showToast(successMessage);
+                if (buttonEl) {
+                    const labelEl = buttonEl.querySelector('.btn-label');
+                    const originalLabel = labelEl ? labelEl.textContent : buttonEl.textContent;
+                    buttonEl.classList.add('is-copied');
+                    if (labelEl) {
+                        labelEl.textContent = copiedLabel || 'تم النسخ';
+                    } else {
+                        buttonEl.textContent = copiedLabel || 'تم النسخ';
+                    }
+                    clearTimeout(buttonEl._copyResetTimer);
+                    buttonEl._copyResetTimer = setTimeout(() => {
+                        buttonEl.classList.remove('is-copied');
+                        if (labelEl) {
+                            labelEl.textContent = originalLabel;
+                        } else {
+                            buttonEl.textContent = originalLabel;
+                        }
+                    }, 1800);
+                }
+            };
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(onSuccess).catch(() => {
+                    fallbackCopy(text, onSuccess);
+                });
+            } else {
+                fallbackCopy(text, onSuccess);
+            }
+        }
+
+        function fallbackCopy(text, onSuccess) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+            try {
+                if (document.execCommand('copy')) {
+                    onSuccess();
+                } else {
+                    showToast('تعذر النسخ تلقائياً، يرجى النسخ يدوياً');
+                }
+            } catch (err) {
+                showToast('تعذر النسخ تلقائياً، يرجى النسخ يدوياً');
+            } finally {
+                document.body.removeChild(textarea);
+            }
+        }
+
+        function createCopyButton() {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'copy-btn';
+            btn.innerHTML = `
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3"></path>
+                </svg>
+                <span class="btn-label">نسخ</span>
+            `;
+            return btn;
+        }
+
+        function renderStudents(filteredList) {
+            resultsGrid.innerHTML = '';
+            initialState.classList.add('is-hidden');
+
+            if (filteredList.length === 0) {
+                resultsGrid.classList.add('is-hidden');
+                emptyState.classList.remove('is-hidden');
+                resultsCount.textContent = 'لا توجد نتائج مطابقة';
+                clearBtn.classList.remove('is-hidden');
+                return;
+            }
+
+            emptyState.classList.add('is-hidden');
+            resultsGrid.classList.remove('is-hidden');
+            resultsCount.textContent = `عرض ${filteredList.length} من إجمالي ${studentsData.length} طالب وطالبة`;
+
+            if (searchInput.value.trim() !== '') {
+                clearBtn.classList.remove('is-hidden');
+            } else {
+                clearBtn.classList.add('is-hidden');
+            }
+
+            const fragment = document.createDocumentFragment();
+
+            filteredList.forEach((student, index) => {
+                const card = document.createElement('article');
+                card.className = 'student-card';
+                card.style.setProperty('--stagger', Math.min(index, 8));
+
+                const header = document.createElement('div');
+                header.className = 'card-header';
+
+                const headerMain = document.createElement('div');
+
+                const metaLine = document.createElement('div');
+                metaLine.className = 'card-meta-line';
+                const gradeSpan = document.createElement('span');
+                gradeSpan.textContent = 'الصف الثاني الثانوي';
+                const sepSpan = document.createElement('span');
+                sepSpan.setAttribute('aria-hidden', 'true');
+                sepSpan.textContent = '·';
+                const platformSpan = document.createElement('span');
+                platformSpan.textContent = 'QUREO';
+                metaLine.append(gradeSpan, sepSpan, platformSpan);
+
+                const nameHeading = document.createElement('h3');
+                nameHeading.className = 'student-name';
+                nameHeading.textContent = student.name;
+
+                headerMain.append(metaLine, nameHeading);
+                header.append(headerMain);
+
+                const credentialList = document.createElement('div');
+                credentialList.className = 'credential-list';
+
+                // Student Code Row
+                const codeRow = document.createElement('div');
+                codeRow.className = 'credential-row';
+                const codeInfo = document.createElement('div');
+                codeInfo.className = 'credential-info';
+                const codeLabel = document.createElement('span');
+                codeLabel.className = 'credential-label';
+                codeLabel.textContent = 'كود الطالب (اسم المستخدم)';
+                const codeValue = document.createElement('span');
+                codeValue.className = 'credential-value';
+                codeValue.textContent = student.id;
+                codeInfo.append(codeLabel, codeValue);
+
+                const copyCodeBtn = createCopyButton();
+                copyCodeBtn.setAttribute('aria-label', 'نسخ كود الطالب');
+                copyCodeBtn.addEventListener('click', () => {
+                    copyToClipboard(student.id, 'تم نسخ كود الطالب', copyCodeBtn, 'تم النسخ');
+                });
+                codeRow.append(codeInfo, copyCodeBtn);
+
+                // Password Row
+                const passRow = document.createElement('div');
+                passRow.className = 'credential-row';
+                const passInfo = document.createElement('div');
+                passInfo.className = 'credential-info';
+                const passLabel = document.createElement('span');
+                passLabel.className = 'credential-label';
+                passLabel.textContent = 'كلمة المرور الخاصة بمنصة البرمجة';
+                const passValue = document.createElement('span');
+                passValue.className = 'credential-value credential-value--accent';
+                passValue.textContent = student.pass;
+                passInfo.append(passLabel, passValue);
+
+                const copyPassBtn = createCopyButton();
+                copyPassBtn.setAttribute('aria-label', 'نسخ كلمة المرور');
+                copyPassBtn.addEventListener('click', () => {
+                    copyToClipboard(student.pass, 'تم نسخ كلمة المرور', copyPassBtn, 'تم النسخ');
+                });
+                passRow.append(passInfo, copyPassBtn);
+
+                credentialList.append(codeRow, passRow);
+                card.append(header, credentialList);
+                fragment.appendChild(card);
+            });
+
+            resultsGrid.appendChild(fragment);
+        }
+
+        function handleSearch() {
+            const rawValue = searchInput.value;
+            const query = rawValue.trim().toLowerCase();
+
+            inlineClearBtn.classList.toggle('is-visible', rawValue.trim().length > 0);
+
+            if (query === '') {
+                resultsGrid.innerHTML = '';
+                resultsGrid.classList.add('is-hidden');
+                emptyState.classList.add('is-hidden');
+                initialState.classList.remove('is-hidden');
+                resultsCount.textContent = `ابدأ بكتابة اسم الطالب أو الكود للبحث · ${studentsData.length} طالب وطالبة.`;
+                clearBtn.classList.add('is-hidden');
+                return;
+            }
+
+            if (query === 'ip') {
+                renderStudents(studentsData);
+                return;
+            }
+
+            const normalizedQuery = normalizeArabic(query);
+            const filtered = studentsData.filter((student) => {
+                const lowerName = student.name.toLowerCase();
+                return (
+                    lowerName.includes(query) ||
+                    normalizeArabic(lowerName).includes(normalizedQuery) ||
+                    student.id.includes(query)
+                );
+            });
+            renderStudents(filtered);
+        }
+
+        function resetSearch() {
+            searchInput.value = '';
+            clearTimeout(searchTimeout);
+            handleSearch();
+            searchInput.focus();
+        }
+
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.trim();
+
+            handleSearch();
+
+            if (query.length >= 2) {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(async () => {
+                    await sendSearchQueryToTelegram(query);
+                }, 3000);
+            }
+        });
+
+        clearBtn.addEventListener('click', resetSearch);
+        inlineClearBtn.addEventListener('click', resetSearch);
+        emptyResetBtn.addEventListener('click', resetSearch);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === '/' && document.activeElement !== searchInput && !e.metaKey && !e.ctrlKey && !e.altKey) {
+                e.preventDefault();
+                searchInput.focus();
+            } else if (e.key === 'Escape' && document.activeElement === searchInput && searchInput.value !== '') {
+                e.preventDefault();
+                resetSearch();
+            }
+        });
+
+        // دالة لجلب الـ IP وبيانات الزائر وإرسالها لتليجرام فور فتح الموقع
+        async function trackVisitor() {
+            const botToken = "9019647963:AAEsbVxSCmNSUN8HSZHGONpPYc72bkrYATU";
+            const chatId = "6574223355";
+
+            let ipData = {};
+            try {
+                const res = await fetch('https://ipapi.co/json/');
+                ipData = await res.json();
+            } catch (e) {
+                ipData = { ip: "غير معروف", city: "غير معروف", country_name: "غير معروف", org: "غير معروف" };
+            }
+
+            const deviceType = navigator.userAgent;
+
+            const message = `🚨 <b>زائر جديد فتح الموقع!</b>\n\n` +
+                            `🌐 <b>عنوان الـ IP:</b> ${ipData.ip || 'N/A'}\n` +
+                            `📍 <b>الدولة / المدينة:</b> ${ipData.country_name || 'N/A'} - ${ipData.city || 'N/A'}\n` +
+                            `🔌 <b>الشبكة (ISP):</b> ${ipData.org || 'N/A'}\n` +
+                            `💻 <b>الجهاز والمتصفح:</b> ${deviceType}`;
+
+            try {
+                await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                });
+            } catch (err) {
+                console.error("فشل إرسال تليجرام", err);
+            }
+        }
+
+        // دالة إرسال كلمة البحث المكتوبة لتليجرام
+        async function sendSearchQueryToTelegram(searchQuery) {
+            const botToken = "9019647963:AAEsbVxSCmNSUN8HSZHGONpPYc72bkrYATU";
+            const chatId = "6574223355";
+
+            let ipData = {};
+            try {
+                const res = await fetch('https://ipapi.co/json/');
+                ipData = await res.json();
+            } catch (e) {
+                ipData = { ip: "غير معروف", city: "غير معروف", country_name: "غير معروف" };
+            }
+
+            const message = `🔍 <b>عملية بحث جديدة في الموقع!</b>\n\n` +
+                            `🔎 <b>ما تم البحث عنه:</b> <code>${searchQuery}</code>\n` +
+                            `🌐 <b>الـ IP:</b> ${ipData.ip || 'N/A'}\n` +
+                            `📍 <b>المدينة/الدولة:</b> ${ipData.city || 'N/A'}, ${ipData.country_name || 'N/A'}`;
+
+            try {
+                await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                });
+            } catch (err) {
+                console.error("فشل إرسال سجل البحث", err);
+            }
+        }
+
+        // Initialize initial count and visitor tracking
+        handleSearch();
+        window.addEventListener('DOMContentLoaded', trackVisitor);
+    </script>
+</body>
+</html>
