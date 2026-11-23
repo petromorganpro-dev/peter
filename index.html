@@ -122,16 +122,141 @@
                         color var(--duration-base) var(--ease-editorial);
         }
 
-        /* Subtle Blush & Muted Gold Ambient Glows */
-        .ambient-canvas {
+        /* حاوية الخلفية الثابتة */
+        .fronza-bg {
             position: fixed;
             inset: 0;
             z-index: -1;
             pointer-events: none;
-            background:
-                radial-gradient(38% 36% at 50% 0%, var(--gold-ambient), transparent 72%),
-                radial-gradient(44% 48% at 96% 14%, var(--bg-ambient-1), transparent 72%),
-                radial-gradient(46% 52% at 4% 82%, var(--bg-ambient-2), transparent 72%);
+            background: radial-gradient(circle at 15% 20%, #240836 0%, #09030f 55%, #05010a 100%);
+            overflow: hidden;
+        }
+
+        /* الإضاءات المتوهجة في الخلفية */
+        .glow-top-right {
+            position: absolute;
+            top: -10%;
+            right: -5%;
+            width: 45vw;
+            height: 45vw;
+            background: radial-gradient(circle, rgba(217, 28, 217, 0.35) 0%, transparent 70%);
+            filter: blur(60px);
+        }
+
+        .glow-bottom-left {
+            position: absolute;
+            bottom: -15%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(180, 30, 220, 0.4) 0%, transparent 70%);
+            filter: blur(70px);
+        }
+
+        /* الأشكال الهندسية المائلة (الزاوية العلوية اليمنى) */
+        .streaks-top-right {
+            position: absolute;
+            top: -80px;
+            right: -120px;
+            width: 650px;
+            height: 500px;
+            transform: rotate(-42deg);
+            pointer-events: none;
+        }
+
+        .streak {
+            position: absolute;
+            border-radius: 4px;
+        }
+
+        .s1 {
+            top: 40px;
+            right: 50px;
+            width: 480px;
+            height: 65px;
+            background: linear-gradient(90deg, transparent, #9d17b5, #f43f9e, #ff7eb3);
+            opacity: 0.9;
+        }
+
+        .s2 {
+            top: 120px;
+            right: 20px;
+            width: 420px;
+            height: 35px;
+            background: linear-gradient(90deg, transparent, #4a0d66, #c026d3);
+            opacity: 0.7;
+        }
+
+        .s3 {
+            top: 25px;
+            right: 110px;
+            width: 350px;
+            height: 8px;
+            background: linear-gradient(90deg, transparent, #ff85a2, #ffffff);
+        }
+
+        /* الأشكال الهندسية المائلة (الزاوية السفلية اليسرى) */
+        .streaks-bottom-left {
+            position: absolute;
+            bottom: -80px;
+            left: -120px;
+            width: 650px;
+            height: 500px;
+            transform: rotate(-42deg);
+            pointer-events: none;
+        }
+
+        .sb1 {
+            bottom: 60px;
+            left: 30px;
+            width: 500px;
+            height: 75px;
+            background: linear-gradient(270deg, transparent, #701a75, #d946ef, #f472b6);
+            opacity: 0.85;
+        }
+
+        .sb2 {
+            bottom: 30px;
+            left: 80px;
+            width: 460px;
+            height: 16px;
+            background: linear-gradient(270deg, transparent, #ec4899, #fda4af);
+        }
+
+        .sb3 {
+            bottom: 150px;
+            left: 10px;
+            width: 380px;
+            height: 45px;
+            background: linear-gradient(270deg, transparent, #2e0842, #86198f);
+            opacity: 0.6;
+        }
+
+        /* شبكات النقاط في الزوايا (Halftone Dots) */
+        .dots-top-left {
+            position: absolute;
+            top: 28px;
+            left: 28px;
+            width: 140px;
+            height: 140px;
+            background-image: radial-gradient(circle, #60a5fa 2.5px, transparent 3px);
+            background-size: 20px 20px;
+            -webkit-mask-image: linear-gradient(135deg, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 75%);
+            mask-image: linear-gradient(135deg, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 75%);
+            opacity: 0.85;
+        }
+
+        .dots-bottom-right {
+            position: absolute;
+            bottom: 28px;
+            right: 28px;
+            width: 180px;
+            height: 160px;
+            background-image: radial-gradient(circle, #818cf8 2.5px, transparent 3px);
+            background-size: 20px 20px;
+            -webkit-mask-image: linear-gradient(-45deg, rgba(0,0,0,1) 25%, rgba(0,0,0,0) 80%);
+            mask-image: linear-gradient(-45deg, rgba(0,0,0,1) 25%, rgba(0,0,0,0) 80%);
+            opacity: 0.85;
         }
 
         .container {
@@ -994,7 +1119,26 @@
     </style>
 </head>
 <body>
-    <div class="ambient-canvas" aria-hidden="true"></div>
+    <!-- كود الخلفية -->
+    <div class="fronza-bg" aria-hidden="true">
+        <div class="glow-top-right"></div>
+        <div class="glow-bottom-left"></div>
+
+        <div class="streaks-top-right">
+            <div class="streak s1"></div>
+            <div class="streak s2"></div>
+            <div class="streak s3"></div>
+        </div>
+
+        <div class="streaks-bottom-left">
+            <div class="streak sb1"></div>
+            <div class="streak sb2"></div>
+            <div class="streak sb3"></div>
+        </div>
+
+        <div class="dots-top-left"></div>
+        <div class="dots-bottom-right"></div>
+    </div>
 
     <!-- Toast Notification -->
     <div id="toast" class="toast" role="status" aria-live="polite">
